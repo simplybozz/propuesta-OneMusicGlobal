@@ -1,7 +1,7 @@
 # One Music Global — propuesta web
 
 Sitio estático (HTML + CSS + JS) con GSAP, ScrollTrigger y Lenis desde CDN.
-Abre `index.html` en el navegador o súbelo tal cual a Netlify / Vercel.
+
 
 ## Editar contenido sin tocar el código
 
@@ -14,6 +14,7 @@ node tools/omg.js ayuda          # todos los comandos con ejemplos
 node tools/omg.js lista          # ver lo que hay y en qué orden
 ```
 
+
 ### Lanzamientos
 ```bash
 node tools/omg.js lanzamiento:agregar --titulo "Nuevo Single" --artista "Raisa Díaz" --imagen C:/ruta/portada.jpg --link https://open.spotify.com/...
@@ -23,6 +24,7 @@ node tools/omg.js lanzamiento:mover vivo-agradecido 1
 Opcionales: `--tipo Single|EP|Álbum`, `--color yellow|teal|sky|white|blue`, `--pos 2`, `--final`, `--pronto` (portada borrosa de "próximamente").
 Si la imagen está fuera del proyecto, se copia sola a `assets/img/`.
 
+
 ### Artistas
 ```bash
 node tools/omg.js artista:agregar --nombre "Nombre" --genero Worship --imagen C:/ruta/foto.jpg
@@ -30,12 +32,14 @@ node tools/omg.js artista:quitar obyone
 node tools/omg.js artista:mover "Grupo Grace" 1
 ```
 
+
 ### Cifras
 ```bash
 node tools/omg.js cifra:editar 2 --valor 30 --sufijo K --texto "personas en nuestra comunidad"
 ```
 
 ¿Prefieres editar `content/content.json` a mano? Hazlo y luego ejecuta `node tools/omg.js build`.
+
 
 ## Estructura
 - `index.html` — página principal
