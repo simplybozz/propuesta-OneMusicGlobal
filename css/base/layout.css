@@ -1,0 +1,55 @@
+.grain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background-image: var(--grain);
+  opacity: .07;
+}
+
+.section {
+  position: relative;
+  padding: clamp(64px, 8vw, 120px) var(--gutter);
+}
+
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: clamp(32px, 4.5vw, 64px);
+}
+
+.section-head h2 {
+  font-size: clamp(3.4rem, 9vw, 9rem);
+}
+
+.section-head p {
+  max-width: 38ch;
+  font-weight: 500;
+  opacity: .85;
+}
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  margin-bottom: 1rem;
+}
+
+.kicker b {
+  display: inline-grid;
+  place-items: center;
+  min-width: 2.2em;
+  height: 2.2em;
+  padding: 0 .5em;
+  border-radius: 99px;
+  border: 1.5px solid currentColor;
+  font-size: .9em;
+}
+
+html.js .reveal-up {
+  opacity: 0;
+  transform: translateY(40px);
+}

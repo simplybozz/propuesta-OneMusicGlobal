@@ -1,41 +1,38 @@
 #!/usr/bin/env node
-/* =========================================================
-   ONE MUSIC GLOBAL — editor de contenido
-   Agrega, quita o reordena lanzamientos, artistas y cifras
-   sin tocar el HTML. Todo vive en content/content.json y este
-   script genera js/data.js, que es lo que lee la página.
-
-   Uso rápido (desde la carpeta del proyecto):
-     node tools/omg.js ayuda
-   ========================================================= */
 'use strict';
 
 const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
-const CONTENT = path.join(ROOT, 'content', 'content.json');
-const OUTPUT = path.join(ROOT, 'js', 'data.js');
+const DATA_DIR = path.join(ROOT, 'js', 'data');
 const IMG_DIR = path.join(ROOT, 'assets', 'img');
+const AUDIO_DIR = path.join(ROOT, 'assets', 'audio');
 const COLORS = ['yellow', 'teal', 'sky', 'white', 'blue'];
 
-/* ---------- utilidades ---------- */
-function load() {
-  return JSON.parse(fs.readFileSync(CONTENT, 'utf8'));
+const FILES = {
+  releases: 'releases.js',
+  artists: 'artists.js',
+  stats: 'stats.js',
+  services: 'services.js',
+  bands: 'bands.js',
+  musicBusinessTicker: 'music-business.js',
+  gallery: 'gallery.js'
+};
+
+function load(key) {
+  const file = path.join(DATA_DIR, FILES[key]);
+  const src = fs.readFileSync(file, 'utf8');
+  const m = src.match(/=\s*(\[[\s\S]*\])\s*;\s*$/);
+  if (!m) fail('No pude leer ' + path.relative(ROOT, file));
+  return JSON.parse(m[1]);
 }
 
-function save(data) {
-  fs.writeFileSync(CONTENT, JSON.stringify(data, null, 2) + '\n', 'utf8');
-  build(data);
-}
-
-function build(data) {
-  data = data || load();
-  const banner =
-    '/* ARCHIVO GENERADO AUTOMÁTICAMENTE — no lo edites a mano.\n' +
-    '   Edita content/content.json o usa: node tools/omg.js ayuda */\n';
-  fs.writeFileSync(OUTPUT, banner + 'window.OMG = ' + JSON.stringify(data, null, 2) + ';\n', 'utf8');
-  console.log('✔ js/data.js actualizado (' + data.releases.length + ' lanzamientos, ' + data.artists.length + ' artistas)');
+function save(key, value) {
+  const file = path.join(DATA_DIR, FILES[key]);
+  const src = 'window.OMG_DATA = window.OMG_DATA || {};\nOMG_DATA.' + key + ' = ' + JSON.stringify(value, null, 2) + ';\n';
+  fs.writeFileSync(file, src, 'utf8');
+  console.log('✔ ' + path.relative(ROOT, file).split(path.sep).join('/') + ' actualizado');
 }
 
 function slugify(text) {
@@ -63,11 +60,16 @@ function fail(msg) {
   process.exit(1);
 }
 
-function need(opts, keys) {
-  keys.forEach(function (k) { if (!opts[k] || opts[k] === true) fail('Falta --' + k + '. Ejecuta "node tools/omg.js ayuda" para ver ejemplos.'); });
+function val(v) {
+  return v && v !== true ? v : '';
 }
 
-/* Busca un elemento por número (1, 2, 3…), slug o título/nombre */
+function need(opts, keys) {
+  keys.forEach(function (k) {
+    if (!val(opts[k])) fail('Falta --' + k + '. Ejecuta "node tools/omg.js ayuda" para ver ejemplos.');
+  });
+}
+
 function findIndex(list, query, field) {
   if (query === undefined) fail('Indica cuál: número, slug o nombre.');
   const n = Number(query);
@@ -78,24 +80,34 @@ function findIndex(list, query, field) {
   return i;
 }
 
-/* Si la imagen está fuera del proyecto, la copia a assets/img */
-function resolveImage(src, slug) {
-  if (!src) return 'assets/img/p4.jpg';
-  if (/^https?:\/\//.test(src)) return src;
+function copyInto(src, dir, slug) {
   const abs = path.resolve(process.cwd(), src);
   if (!fs.existsSync(abs)) {
     const inProject = path.resolve(ROOT, src);
     if (fs.existsSync(inProject)) return path.relative(ROOT, inProject).split(path.sep).join('/');
-    fail('No encuentro la imagen: ' + src);
+    fail('No encuentro el archivo: ' + src);
   }
-  if (abs.startsWith(IMG_DIR)) return path.relative(ROOT, abs).split(path.sep).join('/');
-  const dest = path.join(IMG_DIR, slug + path.extname(abs).toLowerCase());
+  if (abs.startsWith(dir)) return path.relative(ROOT, abs).split(path.sep).join('/');
+  fs.mkdirSync(dir, { recursive: true });
+  const dest = path.join(dir, slug + path.extname(abs).toLowerCase());
   fs.copyFileSync(abs, dest);
-  console.log('  imagen copiada a ' + path.relative(ROOT, dest).split(path.sep).join('/'));
-  return path.relative(ROOT, dest).split(path.sep).join('/');
+  const rel = path.relative(ROOT, dest).split(path.sep).join('/');
+  console.log('  archivo copiado a ' + rel);
+  return rel;
 }
 
-/* Lee los datos públicos de una canción desde su reproductor embebido de Spotify */
+function resolveImage(src, slug) {
+  if (!val(src)) return 'assets/img/p4.jpg';
+  if (/^https?:\/\//.test(src)) return src;
+  return copyInto(src, IMG_DIR, slug);
+}
+
+function resolveAudio(src, slug) {
+  if (!val(src)) return '';
+  if (/^https?:\/\//.test(src)) return src;
+  return copyInto(src, AUDIO_DIR, slug);
+}
+
 async function spotifyTrack(url) {
   const m = String(url).match(/track[/:]([A-Za-z0-9]{22})/);
   if (!m) fail('El enlace de Spotify debe ser de una canción: https://open.spotify.com/track/...');
@@ -121,143 +133,111 @@ async function spotifyTrack(url) {
   return info;
 }
 
-/* Audio: un enlace se usa tal cual; un archivo local se copia a assets/audio */
-function resolveAudio(src, slug) {
-  if (!src || src === true) return '';
-  if (/^https?:\/\//.test(src)) return src;
-  const abs = path.resolve(process.cwd(), src);
-  if (!fs.existsSync(abs)) fail('No encuentro el audio: ' + src);
-  const dir = path.join(ROOT, 'assets', 'audio');
-  fs.mkdirSync(dir, { recursive: true });
-  const dest = path.join(dir, slug + path.extname(abs).toLowerCase());
-  if (abs !== dest) fs.copyFileSync(abs, dest);
-  return path.relative(ROOT, dest).split(path.sep).join('/');
-}
-
 function insertAt(list, item, opts, defaultEnd) {
-  if (opts.pos) list.splice(Math.max(0, Number(opts.pos) - 1), 0, item);
+  if (val(opts.pos)) list.splice(Math.max(0, Number(opts.pos) - 1), 0, item);
   else if (opts.final || (defaultEnd && !opts.inicio)) list.push(item);
   else list.unshift(item);
 }
 
-/* ---------- comandos ---------- */
+function move(key, field, o) {
+  const list = load(key);
+  const i = findIndex(list, o._[1], field);
+  const to = Number(o._[2]);
+  if (!Number.isInteger(to) || to < 1) fail('Indica la nueva posición, por ejemplo: ' + o._[0] + ' ' + (list[i].slug || 1) + ' 1');
+  const [item] = list.splice(i, 1);
+  list.splice(Math.min(to - 1, list.length), 0, item);
+  save(key, list);
+  console.log('✔ ' + item[field] + ' ahora está en la posición ' + to);
+}
+
+function remove(key, field, o) {
+  const list = load(key);
+  const [item] = list.splice(findIndex(list, o._[1], field), 1);
+  save(key, list);
+  console.log('✔ Quitado: ' + item[field]);
+}
+
 const commands = {
   ayuda: help,
   help: help,
 
   lista: function () {
-    const d = load();
-    console.log('\nLANZAMIENTOS (en el orden que se ven en la página)');
-    d.releases.forEach(function (r, i) {
-      console.log('  ' + (i + 1) + '. ' + r.title + ' — ' + r.artist + ' [' + r.type + ']' + (r.soon ? ' (próximamente)' : '') + '  · slug: ' + r.slug);
+    console.log('\nLANZAMIENTOS (js/data/releases.js)');
+    load('releases').forEach(function (r, i) {
+      console.log('  ' + (i + 1) + '. ' + r.title + ' — ' + r.artist + ' [' + r.type + ']' + (r.soon ? ' (próximamente)' : '') + (r.audio ? ' ♪' : '') + '  · slug: ' + r.slug);
     });
-    console.log('\nARTISTAS');
-    d.artists.forEach(function (a, i) { console.log('  ' + (i + 1) + '. ' + a.name + ' [' + a.tag + ']  · slug: ' + a.slug); });
-    console.log('\nCIFRAS');
-    d.stats.forEach(function (s, i) { console.log('  ' + (i + 1) + '. ' + s.value + s.suffix + ' ' + s.label); });
+    console.log('\nARTISTAS (js/data/artists.js)');
+    load('artists').forEach(function (a, i) { console.log('  ' + (i + 1) + '. ' + a.name + ' [' + a.tag + ']  · slug: ' + a.slug); });
+    console.log('\nCIFRAS (js/data/stats.js)');
+    load('stats').forEach(function (s, i) { console.log('  ' + (i + 1) + '. ' + s.value + s.suffix + ' ' + s.label); });
+    console.log('\nSERVICIOS (js/data/services.js)');
+    load('services').forEach(function (s, i) { console.log('  ' + (i + 1) + '. ' + s.title + (s.highlight ? ' ' + s.highlight : '')); });
     console.log('');
   },
 
-  build: function () { build(); },
-  generar: function () { build(); },
-
   'lanzamiento:agregar': async function (o) {
-    // Con --spotify se completan solos el título, artista, portada, año y audio de muestra
-    if (o.spotify && o.spotify !== true) {
+    if (val(o.spotify)) {
       const info = await spotifyTrack(o.spotify);
-      if (!o.titulo) o.titulo = info.title;
-      if (!o.artista) o.artista = info.artist;
-      if (!o.imagen) o.imagen = info.img;
-      if (!o.audio) o.audio = info.audio;
-      if (!o.link) o.link = info.link;
-      if (!o.tipo) o.tipo = 'Single' + (info.year ? ' · ' + info.year : '');
+      if (!val(o.titulo)) o.titulo = info.title;
+      if (!val(o.artista)) o.artista = info.artist;
+      if (!val(o.imagen)) o.imagen = info.img;
+      if (!val(o.audio)) o.audio = info.audio;
+      if (!val(o.link)) o.link = info.link;
+      if (!val(o.tipo)) o.tipo = 'Single' + (info.year ? ' · ' + info.year : '');
     }
     need(o, ['titulo', 'artista']);
-    const d = load();
+    const list = load('releases');
     const slug = slugify(o.titulo);
-    if (d.releases.some(function (r) { return r.slug === slug; })) fail('Ya existe un lanzamiento con ese título.');
-    const color = o.color && COLORS.indexOf(o.color) !== -1 ? o.color : COLORS[d.releases.length % 4];
+    if (list.some(function (r) { return r.slug === slug; })) fail('Ya existe un lanzamiento con ese título.');
     const rel = {
       slug: slug,
       title: o.titulo,
       artist: o.artista,
-      type: o.tipo && o.tipo !== true ? o.tipo : 'Single',
+      type: val(o.tipo) || 'Single',
       img: resolveImage(o.imagen, slug),
-      color: color,
+      color: COLORS.indexOf(o.color) !== -1 ? o.color : COLORS[list.length % 4],
       audio: resolveAudio(o.audio, slug),
-      link: o.link && o.link !== true ? o.link : ''
+      link: val(o.link)
     };
-    if (o.etiqueta && o.etiqueta !== true) rel.label = o.etiqueta;
+    if (val(o.etiqueta)) rel.label = o.etiqueta;
     if (o.pronto) rel.soon = true;
-    insertAt(d.releases, rel, o, false);
-    save(d);
+    insertAt(list, rel, o, false);
+    save('releases', list);
     console.log('✔ Lanzamiento agregado: ' + rel.title + ' — ' + rel.artist);
   },
 
-  'lanzamiento:quitar': function (o) {
-    const d = load();
-    const i = findIndex(d.releases, o._[1], 'title');
-    const [removed] = d.releases.splice(i, 1);
-    save(d);
-    console.log('✔ Lanzamiento quitado: ' + removed.title);
-  },
-
-  'lanzamiento:mover': function (o) {
-    const d = load();
-    const i = findIndex(d.releases, o._[1], 'title');
-    const to = Number(o._[2]);
-    if (!Number.isInteger(to) || to < 1) fail('Indica la nueva posición, por ejemplo: lanzamiento:mover tu-voluntad 1');
-    const [item] = d.releases.splice(i, 1);
-    d.releases.splice(Math.min(to - 1, d.releases.length), 0, item);
-    save(d);
-    console.log('✔ ' + item.title + ' ahora está en la posición ' + to);
-  },
+  'lanzamiento:quitar': function (o) { remove('releases', 'title', o); },
+  'lanzamiento:mover': function (o) { move('releases', 'title', o); },
 
   'artista:agregar': function (o) {
     need(o, ['nombre']);
-    const d = load();
+    const list = load('artists');
     const slug = slugify(o.nombre);
-    if (d.artists.some(function (a) { return a.slug === slug; })) fail('Ya existe un artista con ese nombre.');
+    if (list.some(function (a) { return a.slug === slug; })) fail('Ya existe un artista con ese nombre.');
     const art = {
       slug: slug,
       name: o.nombre,
-      tag: o.genero && o.genero !== true ? o.genero : 'Artista',
+      tag: val(o.genero) || 'Artista',
       img: resolveImage(o.imagen, slug),
-      release: o.lanzamiento && o.lanzamiento !== true ? o.lanzamiento : '—'
+      release: val(o.lanzamiento) || '—'
     };
-    insertAt(d.artists, art, o, true);
-    save(d);
+    insertAt(list, art, o, true);
+    save('artists', list);
     console.log('✔ Artista agregado: ' + art.name);
   },
 
-  'artista:quitar': function (o) {
-    const d = load();
-    const i = findIndex(d.artists, o._[1], 'name');
-    const [removed] = d.artists.splice(i, 1);
-    save(d);
-    console.log('✔ Artista quitado: ' + removed.name);
-  },
-
-  'artista:mover': function (o) {
-    const d = load();
-    const i = findIndex(d.artists, o._[1], 'name');
-    const to = Number(o._[2]);
-    if (!Number.isInteger(to) || to < 1) fail('Indica la nueva posición, por ejemplo: artista:mover obyone 1');
-    const [item] = d.artists.splice(i, 1);
-    d.artists.splice(Math.min(to - 1, d.artists.length), 0, item);
-    save(d);
-    console.log('✔ ' + item.name + ' ahora está en la posición ' + to);
-  },
+  'artista:quitar': function (o) { remove('artists', 'name', o); },
+  'artista:mover': function (o) { move('artists', 'name', o); },
 
   'cifra:editar': function (o) {
-    const d = load();
+    const list = load('stats');
     const n = Number(o._[1]);
-    if (!Number.isInteger(n) || n < 1 || n > d.stats.length) fail('Indica el número de la cifra (1 a ' + d.stats.length + ').');
-    const s = d.stats[n - 1];
+    if (!Number.isInteger(n) || n < 1 || n > list.length) fail('Indica el número de la cifra (1 a ' + list.length + ').');
+    const s = list[n - 1];
     if (o.valor !== undefined) s.value = Number(o.valor);
-    if (o.sufijo !== undefined) s.suffix = o.sufijo === true ? '' : o.sufijo;
-    if (o.texto !== undefined && o.texto !== true) s.label = o.texto;
-    save(d);
+    if (o.sufijo !== undefined) s.suffix = val(o.sufijo);
+    if (val(o.texto)) s.label = o.texto;
+    save('stats', list);
     console.log('✔ Cifra ' + n + ': ' + s.value + s.suffix + ' ' + s.label);
   }
 };
@@ -271,14 +251,12 @@ function help() {
     '  node tools/omg.js lista',
     '',
     'Lanzamientos (los nuevos aparecen primero):',
-    '  La forma más fácil, con el enlace de la canción en Spotify (trae portada y audio):',
     '  node tools/omg.js lanzamiento:agregar --spotify https://open.spotify.com/track/2EoR2N5XhU7HRJUjvxkzW2',
-    '  O a mano:',
-    '  node tools/omg.js lanzamiento:agregar --titulo "Nombre" --artista "Artista" --imagen C:/ruta/portada.jpg',
-    '      opcionales: --tipo "Single · 2026"   --color yellow|teal|sky|white|blue   --audio C:/ruta/cancion.mp3',
+    '  node tools/omg.js lanzamiento:agregar --titulo "Nombre" --artista "Artista" --imagen C:/ruta/portada.jpg --audio C:/ruta/cancion.mp3',
+    '      opcionales: --tipo "Single · 2026"   --color yellow|teal|sky|white|blue',
     '                  --link https://open.spotify.com/...   --pos 2   --final   --pronto',
-    '  node tools/omg.js lanzamiento:quitar "Tu Voluntad"      (o el número / slug)',
-    '  node tools/omg.js lanzamiento:mover vivo-agradecido 1',
+    '  node tools/omg.js lanzamiento:quitar "Arquitecto"',
+    '  node tools/omg.js lanzamiento:mover suena-el-arpa-en-vivo 1',
     '',
     'Artistas (los nuevos van al final del roster):',
     '  node tools/omg.js artista:agregar --nombre "Nombre" --genero Worship --imagen C:/ruta/foto.jpg',
@@ -289,8 +267,7 @@ function help() {
     'Cifras:',
     '  node tools/omg.js cifra:editar 2 --valor 30 --sufijo K --texto "personas en nuestra comunidad"',
     '',
-    'Si editas content/content.json a mano, después ejecuta:',
-    '  node tools/omg.js build',
+    'Servicios, cintas, ticker de Music Business y galería: edita directamente su archivo en js/data/.',
     ''
   ].join('\n'));
 }

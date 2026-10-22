@@ -1,0 +1,95 @@
+@font-face {
+  font-family: "Krick";
+  src: url("../../assets/fonts/Krick-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+.display {
+  font-family: var(--f-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: .94;
+  letter-spacing: -.005em;
+}
+
+.eyebrow {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+
+.hand {
+  font-family: var(--f-hand);
+  font-weight: 600;
+  font-size: clamp(1.25rem, 2vw, 1.7rem);
+  line-height: 1.05;
+}
+
+.hl {
+  color: var(--yellow);
+}
+
+.line {
+  display: block;
+  overflow: hidden;
+  padding: .14em 0 .04em;
+  margin: -.14em 0 -.04em;
+}
+
+.line>span {
+  display: inline-block;
+  will-change: transform;
+}
+
+.eq {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 16px;
+}
+
+.eq i {
+  width: 3px;
+  height: 100%;
+  background: currentColor;
+  border-radius: 2px;
+  transform-origin: bottom;
+  animation: eq 1s ease-in-out infinite;
+}
+
+.eq i:nth-child(2) {
+  animation-delay: -.3s;
+}
+
+.eq i:nth-child(3) {
+  animation-delay: -.6s;
+}
+
+.eq i:nth-child(4) {
+  animation-delay: -.15s;
+}
+
+.is-paused .eq i {
+  animation-play-state: paused;
+}
+
+@keyframes eq {
+
+  0%,
+  100% {
+    transform: scaleY(.2);
+  }
+
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(1turn);
+  }
+}

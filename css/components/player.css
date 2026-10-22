@@ -1,0 +1,156 @@
+.player {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  z-index: 70;
+  transform: translate(-50%, 160%);
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  padding: 8px 10px 8px 8px;
+  border-radius: 999px;
+  background: rgba(5, 10, 38, .94);
+  border: 1px solid rgba(255, 255, 255, .12);
+  color: var(--white);
+  transition: transform .8s var(--ease-out);
+  max-width: calc(100% - 32px);
+}
+
+.player.is-visible {
+  transform: translate(-50%, 0);
+}
+
+.player__progress {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 3px;
+  height: 2px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, .12);
+  overflow: hidden;
+}
+
+.player__progress i {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: var(--yellow);
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+.player__art {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex: none;
+  animation: spin 6s linear infinite;
+}
+
+.player.is-paused .player__art {
+  animation-play-state: paused;
+}
+
+.player__art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.player__txt {
+  min-width: 0;
+  line-height: 1.2;
+}
+
+.player__txt b {
+  display: block;
+  font-size: .85rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player__txt small {
+  font-size: .7rem;
+  opacity: .7;
+}
+
+.player .eq {
+  color: var(--yellow);
+  flex: none;
+}
+
+.player__link {
+  font-size: .66rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  white-space: nowrap;
+  transition: opacity var(--t-fast) var(--ease-out);
+}
+
+.player__link:hover {
+  opacity: .7;
+}
+
+.player__link[hidden] {
+  display: none;
+}
+
+.player__btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--yellow);
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  flex: none;
+  transition: transform var(--t) var(--ease-out);
+}
+
+.player__btn:hover {
+  transform: scale(1.1);
+}
+
+.player__btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+.player__close {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  opacity: .6;
+  flex: none;
+  transition: opacity var(--t-fast) var(--ease-out), transform var(--t) var(--ease-out);
+}
+
+.player__close:hover {
+  opacity: 1;
+  transform: rotate(90deg);
+}
+
+@media (max-width: 520px) {
+  .player {
+    bottom: 14px;
+    gap: .6rem;
+    width: calc(100% - 24px);
+    max-width: 360px;
+  }
+
+  .player__txt {
+    flex: 1;
+  }
+
+  .player__txt small,
+  .player__link {
+    display: none;
+  }
+}

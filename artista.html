@@ -11,19 +11,19 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/main.css">
 
   <script>
     document.documentElement.classList.add('js');
     setTimeout(function () { if (!window.__omgReady) document.documentElement.classList.remove('js'); }, 4500);
   </script>
 </head>
-<body data-page="artist" style="--bg:#050a26">
+<body data-page="artist">
 
   <div class="curtain" aria-hidden="true">
     <span></span><span></span>
     <span>
-      <span class="logo" style="position:static">ONE<svg class="logo-m" viewBox="0 0 26 20"><path class="m1" d="M0 0 13 11 0 20Z"/><path class="m2" d="M26 0 13 11 26 20Z"/></svg>USIC</span>
+      <span class="logo">ONE<svg class="logo-m" viewBox="0 0 26 20"><path class="m1" d="M0 0 13 11 0 20Z"/><path class="m2" d="M26 0 13 11 26 20Z"/></svg>USIC</span>
     </span>
   </div>
 
@@ -37,7 +37,7 @@
     </a>
     <div class="nav__right">
       <a class="pill" href="index.html#roster" data-transition>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(-135deg)"><path d="M7 17 17 7M8 7h9v9"/></svg>
+        <svg class="a-roster-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
         Todo el roster
       </a>
     </div>
@@ -51,12 +51,12 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
           Volver al roster
         </a>
-        <h1 class="display" style="margin-top:1.4rem">
+        <h1 class="display">
           <span class="line"><span data-artist-name>Artista</span></span>
         </h1>
         <div class="a-hero__meta">
           <p class="eyebrow reveal-up"><span data-artist-tag>Worship</span> · One Music Global</p>
-          <div class="hero__ctas reveal-up" style="margin:0">
+          <div class="hero__ctas reveal-up">
             <a class="btn magnetic" href="https://open.spotify.com/playlist/2KwyAltnq7obNVKRtvARpS" target="_blank" rel="noopener">
               Escuchar
               <span class="btn__icon">
@@ -80,12 +80,12 @@
         </ul>
         <div>
           <p data-words>Este perfil es una plantilla de la propuesta. Aquí va la biografía oficial: la historia del artista, su mensaje y los momentos que marcaron su carrera.</p>
-          <p class="hand" style="color:var(--yellow);margin-top:1.6rem">✦ texto de muestra, se reemplaza con la bio real</p>
+          <p class="hand">✦ texto de muestra, se reemplaza con la bio real</p>
         </div>
       </div>
     </section>
 
-    <section class="section" data-bg="ink" style="padding-top:0">
+    <section class="section a-gallery-section" data-bg="ink">
       <div class="a-gallery">
         <figure><img src="assets/img/p8.jpg" alt="" loading="lazy"></figure>
         <figure><img src="assets/img/p6.jpg" alt="" loading="lazy"></figure>
@@ -118,7 +118,14 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-  <script src="js/data.js"></script>
+
+  <script src="js/data/artists.js"></script>
+  <script src="js/data/gallery.js"></script>
+
+  <script src="js/core/app.js"></script>
+
+  <script src="js/sections/artist.js"></script>
+
   <script src="js/main.js"></script>
 </body>
 </html>

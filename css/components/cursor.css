@@ -1,0 +1,50 @@
+.cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 150;
+  pointer-events: none;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  background: var(--yellow);
+  box-shadow: 0 0 0 1.5px var(--ink);
+  display: grid;
+  place-items: center;
+  transition: width var(--t) var(--ease-out), height var(--t) var(--ease-out), margin var(--t) var(--ease-out), background-color var(--t) var(--ease-out), opacity var(--t-fast);
+}
+
+.cursor span {
+  font-size: .62rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+  color: var(--ink);
+  opacity: 0;
+  transition: opacity var(--t-fast) var(--ease-out);
+}
+
+.cursor.is-link {
+  width: 38px;
+  height: 38px;
+  margin: -19px 0 0 -19px;
+  background: rgba(244, 238, 27, .35);
+}
+
+.cursor.is-big {
+  width: 86px;
+  height: 86px;
+  margin: -43px 0 0 -43px;
+  background: var(--yellow);
+}
+
+.cursor.is-big span {
+  opacity: 1;
+}
+
+@media (hover: none),
+(pointer: coarse) {
+  .cursor {
+    display: none;
+  }
+}

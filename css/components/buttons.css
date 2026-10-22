@@ -1,0 +1,148 @@
+.btn {
+  --b: var(--yellow);
+  --t: var(--ink);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: .8em;
+  padding: 1.05em 1.6em 1.05em 1.8em;
+  border-radius: 999px;
+  background: var(--b);
+  color: var(--t);
+  font-weight: 800;
+  font-size: .82rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 140%;
+  aspect-ratio: 1;
+  left: -20%;
+  top: 0;
+  border-radius: 50%;
+  background: var(--white);
+  transform: translateY(60%) scale(.4);
+  transition: transform .8s var(--ease-out);
+}
+
+.btn:hover::before {
+  transform: translateY(-30%) scale(1);
+}
+
+.btn__icon {
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--t);
+  color: var(--b);
+  overflow: hidden;
+  position: relative;
+  transition: transform var(--t) var(--ease-out);
+}
+
+.btn:hover .btn__icon {
+  transform: rotate(45deg);
+}
+
+.btn__icon svg {
+  width: 1em;
+  height: 1em;
+  transition: transform var(--t) var(--ease-out);
+}
+
+.btn__icon svg+svg {
+  position: absolute;
+  transform: translate(-150%, 150%);
+}
+
+.btn:hover .btn__icon svg:first-child {
+  transform: translate(150%, -150%);
+}
+
+.btn:hover .btn__icon svg+svg {
+  transform: none;
+}
+
+.btn-glow {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: .6em;
+  padding: 1.05em 1.7em;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: .82rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--white);
+  isolation: isolate;
+  overflow: hidden;
+  transition: color var(--t) var(--ease-out);
+}
+
+.btn-glow::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 300%;
+  aspect-ratio: 1;
+  z-index: -2;
+  translate: -50% -50%;
+  background: conic-gradient(from 0deg, var(--yellow), var(--teal), var(--sky), var(--white), var(--yellow));
+  animation: spin 3.2s linear infinite;
+  will-change: transform;
+}
+
+.btn-glow::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--blue-2);
+  transition: background-color var(--t) var(--ease-out), inset var(--t) var(--ease-out);
+}
+
+.btn-glow:hover::after {
+  background: var(--ink);
+  inset: 3px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: .55em;
+  padding: .7em 1.15em;
+  border-radius: 999px;
+  font-size: .74rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  border: 1.5px solid currentColor;
+  transition: background-color var(--t) var(--ease-out), color var(--t) var(--ease-out), border-color var(--t) var(--ease-out);
+}
+
+.pill:hover {
+  background: var(--white);
+  color: var(--ink);
+  border-color: var(--white);
+}
+
+.pill svg {
+  width: .9em;
+  height: .9em;
+  transition: transform var(--t) var(--ease-out);
+}
+
+.pill:hover svg {
+  transform: translate(2px, -2px);
+}

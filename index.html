@@ -1,36 +1,44 @@
 <!doctype html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>One Music Global — Música que mueve al mundo</title>
-  <meta name="description" content="One Music Global: compañía boutique que representa a los artistas y sellos más importantes de la música cristiana latina.">
+  <meta name="description"
+    content="One Music Global: compañía boutique que representa a los artistas y sellos más importantes de la música cristiana latina.">
   <meta name="theme-color" content="#1537e0">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
   <link rel="preload" href="assets/fonts/Krick-Bold.otf" as="font" type="font/otf" crossorigin>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/main.css">
 
   <script>
     document.documentElement.classList.add('js');
-    // Red de seguridad: si los scripts no cargan, se muestra el contenido igual.
     setTimeout(function () { if (!window.__omgReady) document.documentElement.classList.remove('js'); }, 4500);
   </script>
 </head>
+
 <body data-page="home">
 
-  <!-- ===== Preloader ===== -->
   <div class="loader" aria-hidden="true">
     <div class="loader__inner">
       <div class="loader__logo">
         <span>ONE</span>
-        <svg class="logo-m" viewBox="0 0 26 20"><path class="m1" d="M0 0 13 11 0 20Z"/><path class="m2" d="M26 0 13 11 26 20Z"/></svg>
+        <svg class="logo-m" viewBox="0 0 26 20">
+          <path class="m1" d="M0 0 13 11 0 20Z" />
+          <path class="m2" d="M26 0 13 11 26 20Z" />
+        </svg>
         <span>USIC</span>
       </div>
-      <div class="loader__eq"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="loader__eq">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
       <div class="loader__bar"><i></i></div>
     </div>
     <div class="loader__words hand">
@@ -43,21 +51,25 @@
     <div class="loader__count">0</div>
   </div>
 
-  <!-- ===== Cortina de transición entre páginas ===== -->
   <div class="curtain" aria-hidden="true">
     <span></span><span></span>
     <span>
-      <span class="logo" style="position:static;transform:none;background:none">ONE<svg class="logo-m" viewBox="0 0 26 20"><path class="m1" d="M0 0 13 11 0 20Z"/><path class="m2" d="M26 0 13 11 26 20Z"/></svg>USIC</span>
+      <span class="logo">ONE<svg class="logo-m" viewBox="0 0 26 20">
+          <path class="m1" d="M0 0 13 11 0 20Z" />
+          <path class="m2" d="M26 0 13 11 26 20Z" />
+        </svg>USIC</span>
     </span>
   </div>
 
   <div class="grain" aria-hidden="true"></div>
   <div class="cursor" aria-hidden="true"><span>VER</span></div>
 
-  <!-- ===== Navegación ===== -->
   <header class="nav">
     <a href="index.html" class="logo" aria-label="One Music Global — inicio">
-      ONE<svg class="logo-m" viewBox="0 0 26 20" aria-hidden="true"><path class="m1" d="M0 0 13 11 0 20Z"/><path class="m2" d="M26 0 13 11 26 20Z"/></svg>USIC
+      ONE<svg class="logo-m" viewBox="0 0 26 20" aria-hidden="true">
+        <path class="m1" d="M0 0 13 11 0 20Z" />
+        <path class="m2" d="M26 0 13 11 26 20Z" />
+      </svg>USIC
       <small>GLOBAL</small>
     </a>
     <nav class="nav__links" aria-label="Principal">
@@ -70,7 +82,10 @@
     <div class="nav__right">
       <a class="pill" href="https://www.onemusicglobal.com" target="_blank" rel="noopener">
         Publishing
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M7 17 17 7M8 7h9v9" />
+        </svg>
       </a>
       <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">
         <span class="menu-toggle__txt" aria-hidden="true"><span>Menú</span><span>Cerrar</span></span>
@@ -98,39 +113,50 @@
 
   <main>
 
-    <!-- ===== HERO ===== -->
     <section class="hero" data-bg="blue" aria-label="Inicio">
-      <svg class="hero__squiggle" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <path d="M-60 70 C 160 20 360 40 560 70 C 700 92 760 60 820 110 C 900 180 860 330 930 420 C 1000 520 1080 600 1000 640 C 920 680 880 560 980 520 C 1100 470 1220 330 1290 200 C 1340 110 1420 80 1520 100"/>
-      </svg>
-
       <div class="hero__copy">
         <p class="eyebrow hero__eyebrow">Sello boutique · Música cristiana latina</p>
         <h1 class="display hero__title">
           <span class="line"><span>Música que</span></span>
-          <span class="line" style="overflow:visible"><span class="word-mueve">Mueve
-            <svg class="hero__circle" viewBox="0 0 400 160" preserveAspectRatio="none" aria-hidden="true"><path d="M330 30 C 250 0 60 10 22 70 C -10 125 120 155 230 148 C 340 140 405 100 380 55 C 362 22 300 12 250 14"/></svg>
-            <span class="hand hero__note">¡y transforma!</span>
-          </span></span>
+          <span class="line line--free"><span class="word-mueve">Mueve
+              <svg class="hero__circle" viewBox="0 0 400 160" preserveAspectRatio="none" aria-hidden="true">
+                <path
+                  d="M330 30 C 250 0 60 10 22 70 C -10 125 120 155 230 148 C 340 140 405 100 380 55 C 362 22 300 12 250 14" />
+              </svg>
+              <span class="hand hero__note">¡y transforma!</span>
+            </span></span>
           <span class="line"><span>al mundo.</span></span>
         </h1>
       </div>
 
       <div class="hero__media" aria-hidden="true">
-        <figure class="polaroid polaroid--1" data-depth="0.6"><img src="assets/img/p3.jpg" alt=""><figcaption>en vivo ✦</figcaption></figure>
-        <figure class="polaroid polaroid--2" data-depth="1.2"><img src="assets/img/p8.jpg" alt=""><figcaption>adoración sin fronteras</figcaption></figure>
-        <figure class="polaroid polaroid--3" data-depth="0.9"><img src="assets/img/p14.jpg" alt=""><figcaption>studio days</figcaption></figure>
+        <figure class="polaroid polaroid--1" data-depth="0.6"><img src="assets/img/p3.jpg" alt="">
+          <figcaption>en vivo ✦</figcaption>
+        </figure>
+        <figure class="polaroid polaroid--2" data-depth="1.2"><img src="assets/img/p8.jpg" alt="">
+          <figcaption>adoración sin fronteras</figcaption>
+        </figure>
+        <figure class="polaroid polaroid--3" data-depth="0.9"><img src="assets/img/p14.jpg" alt="">
+          <figcaption>studio days</figcaption>
+        </figure>
       </div>
 
       <div class="hero__bottom">
         <div>
-          <p class="hero__lead reveal-up">Representamos a los artistas y sellos más importantes de la música cristiana latina. Desarrollo, distribución, marketing y contenido para que tu mensaje llegue más lejos.</p>
+          <p class="hero__lead reveal-up">Representamos a los artistas y sellos más importantes de la música cristiana
+            latina. Desarrollo, distribución, marketing y contenido para que tu mensaje llegue más lejos.</p>
           <div class="hero__ctas reveal-up">
             <a class="btn magnetic" href="#roster">
               Conoce el roster
               <span class="btn__icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M7 17 17 7M8 7h9v9" />
+                </svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M7 17 17 7M8 7h9v9" />
+                </svg>
               </span>
             </a>
             <a class="btn-glow magnetic" href="#contacto">Envía tu música</a>
@@ -141,31 +167,40 @@
 
         <div class="badge reveal-up">
           <svg class="badge__ring" viewBox="0 0 150 150" aria-hidden="true">
-            <defs><path id="ring" d="M75 75 m-58 0 a58 58 0 1 1 116 0 a58 58 0 1 1 -116 0"/></defs>
-            <text><textPath href="#ring">One Music Global ✦ Música con propósito ✦ </textPath></text>
+            <defs>
+              <path id="ring" d="M75 75 m-58 0 a58 58 0 1 1 116 0 a58 58 0 1 1 -116 0" />
+            </defs>
+            <text>
+              <textPath href="#ring">One Music Global ✦ Música con propósito ✦ </textPath>
+            </text>
           </svg>
           <a class="badge__play" href="#playlist" aria-label="Escuchar One's Playlist" data-cursor="PLAY">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 3.5v17l15-8.5z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M5 3.5v17l15-8.5z" />
+            </svg>
           </a>
         </div>
       </div>
     </section>
 
-    <!-- ===== Bandas cruzadas ===== -->
     <div class="bands" aria-hidden="true">
-      <div class="band band--b"><div class="band__track" data-dir="1"></div></div>
-      <div class="band band--a"><div class="band__track" data-dir="-1"></div></div>
+      <div class="band band--b">
+        <div class="band__track" data-dir="1"></div>
+      </div>
+      <div class="band band--a">
+        <div class="band__track" data-dir="-1"></div>
+      </div>
     </div>
 
-    <!-- ===== Manifiesto ===== -->
     <section class="section manifesto" data-bg="ink" id="nosotros">
       <p class="eyebrow kicker"><b>01</b> Quiénes somos</p>
       <p class="manifesto__text" data-words>
-        Somos <span class="hl-word">One Music Global</span>, una compañía boutique que impulsa a los artistas y sellos que están definiendo la música cristiana latina. Del primer demo al escenario más grande, con estrategia, cercanía y mucho <span class="hl-word">propósito</span>.
+        Somos <span class="hl-word">One Music Global</span>, una compañía boutique que impulsa a los artistas y sellos
+        que están definiendo la música cristiana latina. Del primer demo al escenario más grande, con estrategia,
+        cercanía y mucho <span class="hl-word">propósito</span>.
       </p>
     </section>
 
-    <!-- ===== Roster ===== -->
     <section class="section roster" data-bg="ink" id="roster" aria-label="Artistas">
       <div class="roster__pin">
         <div class="display roster__ghost" aria-hidden="true">Roster ✦ Roster ✦ Roster</div>
@@ -180,80 +215,18 @@
       </div>
     </section>
 
-    <!-- ===== Servicios ===== -->
     <section class="section services" data-bg="paper" id="servicios">
       <div class="section-head">
         <div>
           <p class="eyebrow kicker"><b>03</b> Qué hacemos</p>
           <h2 class="display">Todo lo que tu<br>música necesita</h2>
         </div>
-        <p>Un equipo boutique: pocos artistas, atención total. Acompañamos cada etapa del camino, desde la idea hasta las playlists editoriales.</p>
+        <p>Un equipo boutique: pocos artistas, atención total. Acompañamos cada etapa del camino, desde la idea hasta
+          las playlists editoriales.</p>
       </div>
-
-      <div class="stack">
-        <article class="svc svc--yellow" style="--i:0">
-          <div class="svc__top">
-            <span class="svc__num">01 / 05</span>
-            <div>
-              <h3 class="display">Desarrollo de artistas</h3>
-              <p>Dirección artística, imagen y planificación de carrera. Construimos proyectos sólidos que se sostienen en el tiempo.</p>
-            </div>
-            <div class="svc__chips"><span>Dirección artística</span><span>Imagen</span><span>Plan de carrera</span></div>
-          </div>
-          <div class="svc__media"><img src="assets/img/p18.jpg" alt="Banda en escenario iluminado" loading="lazy" data-speed="0.12"></div>
-        </article>
-
-        <article class="svc svc--blue" style="--i:1">
-          <div class="svc__top">
-            <span class="svc__num">02 / 05</span>
-            <div>
-              <h3 class="display">Distribución digital</h3>
-              <p>Tu música en todas las plataformas, con una cadena de distribución de audio y video transparente y eficiente.</p>
-            </div>
-            <div class="svc__chips"><span>Spotify</span><span>Apple Music</span><span>YouTube</span><span>Amazon Music</span></div>
-          </div>
-          <div class="svc__media"><img src="assets/img/p17.jpg" alt="Colección de vinilos y audífonos" loading="lazy" data-speed="0.12"></div>
-        </article>
-
-        <article class="svc svc--teal" style="--i:2">
-          <div class="svc__top">
-            <span class="svc__num">03 / 05</span>
-            <div>
-              <h3 class="display">Marketing &amp; playlisting</h3>
-              <p>Lanzamientos con estrategia: pitch editorial, campañas en redes y presencia en playlists que conectan con tu audiencia.</p>
-            </div>
-            <div class="svc__chips"><span>Pitch editorial</span><span>Campañas</span><span>Redes sociales</span></div>
-          </div>
-          <div class="svc__media"><img src="assets/img/p4.jpg" alt="Público en concierto con luces de colores" loading="lazy" data-speed="0.12"></div>
-        </article>
-
-        <article class="svc svc--ink" style="--i:3">
-          <div class="svc__top">
-            <span class="svc__num">04 / 05</span>
-            <div>
-              <h3 class="display">Contenido <span class="hl">original</span></h3>
-              <p>Formatos propios como <strong>One Spotlight</strong> y <strong>Behind the Song</strong>, que cuentan la historia detrás de cada canción.</p>
-            </div>
-            <div class="svc__chips"><span>One Spotlight</span><span>Behind the Song</span><span>Video</span></div>
-          </div>
-          <div class="svc__media"><img src="assets/img/p7.jpg" alt="Letrero de neón con una nota musical" loading="lazy" data-speed="0.12"></div>
-        </article>
-
-        <article class="svc svc--white" style="--i:4">
-          <div class="svc__top">
-            <span class="svc__num">05 / 05</span>
-            <div>
-              <h3 class="display">Educación musical</h3>
-              <p>Con <strong>Music Business</strong> formamos a músicos, compositores y equipos en el negocio de la música.</p>
-            </div>
-            <div class="svc__chips"><span>Conferencias</span><span>Talleres</span><span>Comunidad</span></div>
-          </div>
-          <div class="svc__media"><img src="assets/img/p12.jpg" alt="Escenario con público levantando las manos" loading="lazy" data-speed="0.12"></div>
-        </article>
-      </div>
+      <div class="stack" data-render="services"></div>
     </section>
 
-    <!-- ===== Lanzamientos ===== -->
     <section class="section releases" data-bg="yellow" id="lanzamientos">
       <div class="section-head">
         <div>
@@ -262,58 +235,59 @@
         </div>
         <p>Toca un disco para escuchar un adelanto en el reproductor.</p>
       </div>
-
-      <!-- Los discos se generan desde content/content.json (node tools/omg.js ayuda) -->
       <div class="records" data-render="releases"></div>
     </section>
 
-    <!-- ===== Cifras ===== -->
     <section class="section stats" data-bg="ink" aria-label="Cifras">
-      <!-- Las cifras se generan desde content/content.json -->
       <div class="stats__grid" data-render="stats"></div>
     </section>
 
-    <!-- ===== Music Business ===== -->
     <section class="mb" data-bg="ink" id="music-business">
-      <!-- Video del recap de Music Business 104 (@onemusicglobal). Sin sonido, en bucle y en blanco y negro. -->
       <div class="mb__frame">
-        <video class="mb__video" src="assets/video/music-business-recap.mp4" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback aria-hidden="true" tabindex="-1"></video>
+        <video class="mb__video" src="assets/video/music-business-recap.mp4" muted loop playsinline preload="none"
+          disablepictureinpicture disableremoteplayback aria-hidden="true" tabindex="-1"></video>
       </div>
-      <!-- "Music" se escala desde JS para medir lo mismo que "Business" -->
       <p class="mb__corners mb__kicker">
         <span class="line"><span data-fit-to=".mb__kicker-ref">Music</span></span>
         <span class="line"><span class="mb__kicker-ref">Business</span></span>
       </p>
       <div class="mb__content">
         <h2 class="mb__title">
-          <!-- "4 años" se escala desde JS para que mida lo mismo que "hablando", como en el post -->
           <span class="line mb__fit"><span data-fit-to=".mb__fit-ref">4 años</span></span>
           <span class="line"><span class="mb__fit-ref">hablando</span></span>
           <span class="line mb__line-box"><span class="mb__box">del negocio de la música</span></span>
         </h2>
-        <p class="mb__sub">Cuatro ediciones después, la conversación sigue. Conferencias para músicos, compositores y equipos que quieren profesionalizar su ministerio.</p>
+        <p class="mb__sub">Cuatro ediciones después, la conversación sigue. Conferencias para músicos, compositores y
+          equipos que quieren profesionalizar su ministerio.</p>
         <div class="mb__ctas">
           <a class="btn magnetic" href="https://www.instagram.com/musicbusiness100/" target="_blank" rel="noopener">
             Próxima edición
             <span class="btn__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M7 17 17 7M8 7h9v9" />
+              </svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M7 17 17 7M8 7h9v9" />
+              </svg>
             </span>
           </a>
         </div>
       </div>
-      <!-- El texto se repite desde JS las veces necesarias para que el bucle nunca se corte -->
-      <div class="mb__ticker" aria-hidden="true"><div class="mb__ticker-track" data-ticker="Music Business 101 ✦ Music Business 102 ✦ Music Business 103 ✦ Music Business 104 ✦ La conversación sigue ✦ "></div></div>
+      <div class="mb__ticker" aria-hidden="true">
+        <div class="mb__ticker-track"></div>
+      </div>
     </section>
 
-    <!-- ===== Dos casas ===== -->
     <section class="section houses" data-bg="blue" aria-label="Global y Publishing">
       <div class="section-head">
         <div>
           <p class="eyebrow kicker"><b>05</b> El ecosistema</p>
           <h2 class="display">Un solo One.<br><span class="hl">Dos casas.</span></h2>
         </div>
-        <p>Global trabaja con los artistas y sellos. Publishing protege y administra el trabajo de los compositores. Juntos cubrimos toda la vida de una canción.</p>
+        <p>Global trabaja con los artistas y sellos. Publishing protege y administra el trabajo de los compositores.
+          Juntos cubrimos toda la vida de una canción.</p>
       </div>
       <div class="houses__grid">
         <article class="house house--global" data-cursor="AQUÍ">
@@ -321,8 +295,12 @@
           <span class="house__badge">Estás aquí</span>
           <div>
             <h3 class="display">Global</h3>
-            <p>Artistas, sellos, lanzamientos, contenido y eventos. La parte de la música que se ve, se escucha y se vive en el escenario.</p>
-            <a class="house__link" href="#roster">Ver artistas <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+            <p>Artistas, sellos, lanzamientos, contenido y eventos. La parte de la música que se ve, se escucha y se
+              vive en el escenario.</p>
+            <a class="house__link" href="#roster">Ver artistas <svg viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 17 17 7M8 7h9v9" />
+              </svg></a>
           </div>
         </article>
         <article class="house house--pub" data-cursor="IR">
@@ -330,64 +308,89 @@
           <span class="house__badge">Publishing</span>
           <div>
             <h3 class="display">Publishing</h3>
-            <p>Administración de publishing, gestión de compositores y recaudación de regalías. Tu catálogo, organizado y protegido.</p>
-            <a class="house__link" href="https://www.onemusicglobal.com" target="_blank" rel="noopener">Visitar Publishing <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+            <p>Administración de publishing, gestión de compositores y recaudación de regalías. Tu catálogo, organizado
+              y protegido.</p>
+            <a class="house__link" href="https://www.onemusicglobal.com" target="_blank" rel="noopener">Visitar
+              Publishing <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 17 17 7M8 7h9v9" />
+              </svg></a>
           </div>
         </article>
       </div>
     </section>
 
-    <!-- ===== Playlist ===== -->
     <section class="section playlist" data-bg="teal" id="playlist">
       <div class="playlist__grid">
         <div>
           <p class="eyebrow kicker"><b>06</b> Dale play</p>
-          <h2 class="display">One's<br><span style="color:var(--ink)">Playlist</span></h2>
-          <p class="playlist__lead">Lo nuevo de nuestro roster y lo que estamos escuchando en la oficina, en una sola lista que actualizamos cada semana.</p>
+          <h2 class="display">One's<br><span class="playlist__dark">Playlist</span></h2>
+          <p class="playlist__lead">Lo nuevo de nuestro roster y lo que estamos escuchando en la oficina, en una sola
+            lista que actualizamos cada semana.</p>
           <div class="playlist__links">
-            <a class="btn magnetic" style="--b: var(--ink); --t: var(--yellow)" href="https://open.spotify.com/playlist/2KwyAltnq7obNVKRtvARpS" target="_blank" rel="noopener">
+            <a class="btn magnetic" href="https://open.spotify.com/playlist/2KwyAltnq7obNVKRtvARpS" target="_blank"
+              rel="noopener">
               Abrir en Spotify
               <span class="btn__icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M7 17 17 7M8 7h9v9" />
+                </svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M7 17 17 7M8 7h9v9" />
+                </svg>
               </span>
             </a>
-            <a class="pill" href="https://www.youtube.com/@onemusicglobaloficial" target="_blank" rel="noopener">YouTube <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+            <a class="pill" href="https://www.youtube.com/@onemusicglobaloficial" target="_blank" rel="noopener">YouTube
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M7 17 17 7M8 7h9v9" />
+              </svg></a>
           </div>
         </div>
         <div class="playlist__embed">
           <div class="playlist__disc" aria-hidden="true"></div>
-          <iframe data-src="https://open.spotify.com/embed/playlist/2KwyAltnq7obNVKRtvARpS?utm_source=generator&theme=0" title="One's Playlist en Spotify" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+          <iframe data-src="https://open.spotify.com/embed/playlist/2KwyAltnq7obNVKRtvARpS?utm_source=generator&theme=0"
+            title="One's Playlist en Spotify"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
       </div>
     </section>
 
-    <!-- ===== Contacto ===== -->
     <section class="section contact" data-bg="blue" id="contacto">
       <svg class="contact__squig" viewBox="0 0 1440 500" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M-40 380 C 160 300 260 120 380 170 C 500 220 420 380 540 390 C 700 400 760 160 900 150 C 1040 140 1000 330 1120 330 C 1240 330 1300 210 1480 240"/>
+        <path
+          d="M-40 380 C 160 300 260 120 380 170 C 500 220 420 380 540 390 C 700 400 760 160 900 150 C 1040 140 1000 330 1120 330 C 1240 330 1300 210 1480 240" />
       </svg>
-      <p class="eyebrow kicker" style="justify-self:center"><b>07</b> Trabajemos juntos</p>
+      <p class="eyebrow kicker"><b>07</b> Trabajemos juntos</p>
       <h2 class="display contact__title" data-chars>
         <span class="line"><span class="contact__fit-ref">Hagamos</span></span>
-        <!-- "Ruido" se escala desde JS para medir lo mismo que "Hagamos" -->
         <span class="line"><span class="hl" data-fit-to=".contact__fit-ref">ruido</span></span>
       </h2>
-      <p class="contact__lead">¿Eres artista, sello o manager? Cuéntanos tu proyecto. Escuchamos cada propuesta con atención.</p>
+      <p class="contact__lead">¿Eres artista, sello o manager? Cuéntanos tu proyecto. Escuchamos cada propuesta con
+        atención.</p>
       <div class="contact__ctas">
-        <a class="btn magnetic" href="mailto:hola@onemusicglobal.com?subject=Quiero%20trabajar%20con%20One%20Music%20Global">
+        <a class="btn magnetic"
+          href="mailto:hola@onemusicglobal.com?subject=Quiero%20trabajar%20con%20One%20Music%20Global">
           Envía tu música
           <span class="btn__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M7 17 17 7M8 7h9v9" />
+            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M7 17 17 7M8 7h9v9" />
+            </svg>
           </span>
         </a>
-        <a class="btn-glow magnetic" href="https://www.instagram.com/onemusicglobal/" target="_blank" rel="noopener">Escríbenos por Instagram</a>
+        <a class="btn-glow magnetic" href="https://www.instagram.com/onemusicglobal/" target="_blank"
+          rel="noopener">Escríbenos por Instagram</a>
       </div>
     </section>
   </main>
 
-  <!-- ===== Footer ===== -->
   <footer class="footer">
     <div class="footer__grid">
       <div class="footer__news">
@@ -413,48 +416,82 @@
         <ul>
           <li><a href="https://www.instagram.com/onemusicglobal/" target="_blank" rel="noopener">Instagram</a></li>
           <li><a href="https://www.youtube.com/@onemusicglobaloficial" target="_blank" rel="noopener">YouTube</a></li>
-          <li><a href="https://open.spotify.com/playlist/2KwyAltnq7obNVKRtvARpS" target="_blank" rel="noopener">Spotify</a></li>
+          <li><a href="https://open.spotify.com/playlist/2KwyAltnq7obNVKRtvARpS" target="_blank"
+              rel="noopener">Spotify</a></li>
         </ul>
       </div>
       <div>
         <h4>Familia One</h4>
         <ul>
           <li><a href="https://www.onemusicglobal.com" target="_blank" rel="noopener">One Music Publishing</a></li>
-          <li><a href="https://www.instagram.com/onemusicpublishing/" target="_blank" rel="noopener">@onemusicpublishing</a></li>
-          <li><a href="https://www.instagram.com/musicbusiness100/" target="_blank" rel="noopener">@musicbusiness100</a></li>
+          <li><a href="https://www.instagram.com/onemusicpublishing/" target="_blank"
+              rel="noopener">@onemusicpublishing</a></li>
+          <li><a href="https://www.instagram.com/musicbusiness100/" target="_blank" rel="noopener">@musicbusiness100</a>
+          </li>
         </ul>
       </div>
     </div>
     <div class="footer__base">
       <span>© 2026 One Music Global. Todos los derechos reservados.</span>
       <a href="index.html" class="logo footer__logo" aria-label="One Music Global — inicio">
-        ONE<svg class="logo-m" viewBox="0 0 26 20" aria-hidden="true"><path class="m1" d="M0 0 13 11 0 20Z"/><path class="m2" d="M26 0 13 11 26 20Z"/></svg>USIC
+        ONE<svg class="logo-m" viewBox="0 0 26 20" aria-hidden="true">
+          <path class="m1" d="M0 0 13 11 0 20Z" />
+          <path class="m2" d="M26 0 13 11 26 20Z" />
+        </svg>USIC
         <small>GLOBAL</small>
       </a>
       <span>Música con propósito ✦ Hecho con fe</span>
     </div>
   </footer>
 
-  <!-- ===== Volver arriba ===== -->
   <button class="to-top" aria-label="Volver al inicio" data-cursor="ARRIBA">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"
+      stroke-linejoin="round">
+      <path d="M12 19V5M5 12l7-7 7 7" />
+    </svg>
   </button>
 
-  <!-- ===== Mini reproductor ===== -->
   <div class="player is-paused" role="region" aria-label="Reproductor">
     <span class="player__progress" aria-hidden="true"><i></i></span>
     <div class="player__art"><img src="assets/img/p19.jpg" alt=""></div>
     <div class="player__txt"><b>—</b><small>—</small></div>
     <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
     <a class="player__link" href="#" target="_blank" rel="noopener" hidden>Spotify ↗</a>
-    <button class="player__btn" aria-label="Pausar"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></button>
-    <button class="player__close" aria-label="Cerrar reproductor"><svg viewBox="0 0 24 24" width="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <button class="player__btn" aria-label="Reproducir"><svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M6 4v16l14-8z" />
+      </svg></button>
+    <button class="player__close" aria-label="Cerrar reproductor"><svg viewBox="0 0 24 24" width="14" fill="none"
+        stroke="currentColor" stroke-width="2.6" stroke-linecap="round">
+        <path d="M6 6l12 12M18 6 6 18" />
+      </svg></button>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-  <script src="js/data.js"></script>
+
+  <script src="js/data/bands.js"></script>
+  <script src="js/data/artists.js"></script>
+  <script src="js/data/services.js"></script>
+  <script src="js/data/releases.js"></script>
+  <script src="js/data/stats.js"></script>
+  <script src="js/data/music-business.js"></script>
+
+  <script src="js/core/app.js"></script>
+
+  <script src="js/sections/hero.js"></script>
+  <script src="js/sections/bands.js"></script>
+  <script src="js/sections/manifesto.js"></script>
+  <script src="js/sections/roster.js"></script>
+  <script src="js/sections/services.js"></script>
+  <script src="js/sections/releases.js"></script>
+  <script src="js/sections/stats.js"></script>
+  <script src="js/sections/music-business.js"></script>
+  <script src="js/sections/houses.js"></script>
+  <script src="js/sections/playlist.js"></script>
+  <script src="js/sections/contact.js"></script>
+
   <script src="js/main.js"></script>
 </body>
+
 </html>

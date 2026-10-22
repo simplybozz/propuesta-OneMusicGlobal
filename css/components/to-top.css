@@ -1,0 +1,61 @@
+.to-top {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 75;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--yellow);
+  color: var(--ink);
+  box-shadow: 0 14px 30px -12px rgba(5, 10, 38, .55), 0 0 0 1.5px var(--ink);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px) scale(.8);
+  transition: opacity var(--t) var(--ease-out), transform var(--t) var(--ease-out), visibility var(--t), background-color var(--t) var(--ease-out), bottom var(--t) var(--ease-out);
+}
+
+.to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.to-top:hover {
+  background: var(--white);
+  transform: translateY(-4px);
+}
+
+.to-top svg {
+  width: 20px;
+  height: 20px;
+  transition: transform var(--t) var(--ease-out);
+}
+
+.to-top:hover svg {
+  transform: translateY(-3px);
+}
+
+.menu-open .to-top {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.has-player .to-top {
+  bottom: 88px;
+}
+
+@media (max-width: 520px) {
+  .to-top {
+    right: 14px;
+    bottom: 16px;
+    width: 48px;
+    height: 48px;
+  }
+
+  .has-player .to-top {
+    bottom: 82px;
+  }
+}

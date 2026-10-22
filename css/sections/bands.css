@@ -1,0 +1,52 @@
+.bands {
+  position: relative;
+  height: clamp(170px, 22vw, 260px);
+  margin: -40px 0 0;
+  z-index: 4;
+  overflow: hidden;
+}
+
+.band {
+  position: absolute;
+  left: -5%;
+  width: 110%;
+  top: 50%;
+  padding: .9rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: var(--f-display);
+  font-size: clamp(1.6rem, 3.4vw, 3rem);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.band--a {
+  background: var(--yellow);
+  color: var(--ink);
+  transform: translateY(-50%) rotate(-4deg);
+  z-index: 2;
+  box-shadow: 0 20px 40px -18px rgba(0, 0, 0, .5);
+}
+
+.band--b {
+  background: var(--teal);
+  color: var(--white);
+  transform: translateY(-50%) rotate(3.5deg);
+}
+
+.band__track {
+  display: inline-flex;
+  will-change: transform;
+}
+
+.band__track span {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.2em;
+  padding-right: 1.2em;
+}
+
+.band__track svg {
+  width: .62em;
+  height: .62em;
+}
