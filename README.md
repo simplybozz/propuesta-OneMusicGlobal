@@ -16,8 +16,14 @@ node tools/omg.js lista          # ver lo que hay y en qué orden
 
 
 ### Lanzamientos
+La forma más fácil: pega el enlace de la canción en Spotify y el script trae solo el título,
+artista, portada, año y el audio de muestra de 30 s que suena en el reproductor.
 ```bash
-node tools/omg.js lanzamiento:agregar --titulo "Nuevo Single" --artista "Raisa Díaz" --imagen C:/ruta/portada.jpg --link https://open.spotify.com/...
+node tools/omg.js lanzamiento:agregar --spotify https://open.spotify.com/track/2EoR2N5XhU7HRJUjvxkzW2
+```
+O a mano (con `--audio` puedes usar un mp3 propio):
+```bash
+node tools/omg.js lanzamiento:agregar --titulo "Nuevo Single" --artista "Raisa Díaz" --imagen C:/ruta/portada.jpg --audio C:/ruta/cancion.mp3
 node tools/omg.js lanzamiento:quitar "Tu Voluntad"
 node tools/omg.js lanzamiento:mover vivo-agradecido 1
 ```

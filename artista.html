@@ -101,14 +101,19 @@
   </main>
 
   <footer class="footer">
-    <div class="display footer__giant" aria-hidden="true">
-      <span>ONE</span><svg class="logo-m" viewBox="0 0 26 20"><path class="m1" d="M0 0 13 11 0 20Z"/><path class="m2" d="M26 0 13 11 26 20Z"/></svg><span>USIC</span>
-    </div>
     <div class="footer__base">
       <span>© 2026 One Music Global. Todos los derechos reservados.</span>
-      <a href="index.html" data-transition>Volver al inicio ↑</a>
+      <a href="index.html" class="logo footer__logo" aria-label="One Music Global — inicio" data-transition>
+        ONE<svg class="logo-m" viewBox="0 0 26 20" aria-hidden="true"><path class="m1" d="M0 0 13 11 0 20Z"/><path class="m2" d="M26 0 13 11 26 20Z"/></svg>USIC
+        <small>GLOBAL</small>
+      </a>
+      <span>Música con propósito ✦ Hecho con fe</span>
     </div>
   </footer>
+
+  <button class="to-top" aria-label="Volver al inicio" data-cursor="ARRIBA">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>

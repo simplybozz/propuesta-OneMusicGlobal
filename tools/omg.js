@@ -81,6 +81,7 @@ function findIndex(list, query, field) {
 /* Si la imagen está fuera del proyecto, la copia a assets/img */
 function resolveImage(src, slug) {
   if (!src) return 'assets/img/p4.jpg';
+  if (/^https?:\/\//.test(src)) return src;
   const abs = path.resolve(process.cwd(), src);
   if (!fs.existsSync(abs)) {
     const inProject = path.resolve(ROOT, src);
@@ -91,6 +92,45 @@ function resolveImage(src, slug) {
   const dest = path.join(IMG_DIR, slug + path.extname(abs).toLowerCase());
   fs.copyFileSync(abs, dest);
   console.log('  imagen copiada a ' + path.relative(ROOT, dest).split(path.sep).join('/'));
+  return path.relative(ROOT, dest).split(path.sep).join('/');
+}
+
+/* Lee los datos públicos de una canción desde su reproductor embebido de Spotify */
+async function spotifyTrack(url) {
+  const m = String(url).match(/track[/:]([A-Za-z0-9]{22})/);
+  if (!m) fail('El enlace de Spotify debe ser de una canción: https://open.spotify.com/track/...');
+  let html;
+  try {
+    const res = await fetch('https://open.spotify.com/embed/track/' + m[1], { headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130 Safari/537.36' } });
+    html = await res.text();
+  } catch (e) { fail('No pude conectar con Spotify: ' + e.message); }
+  const json = html.match(/<script id="__NEXT_DATA__" type="application\/json">(.*?)<\/script>/s);
+  if (!json) fail('Spotify no devolvió los datos de la canción. Agrégala con --titulo y --artista.');
+  const e = JSON.parse(json[1]).props.pageProps.state.data.entity;
+  const imgs = (e.visualIdentity && e.visualIdentity.image) || [];
+  const big = imgs.slice().sort(function (a, b) { return (b.maxWidth || 0) - (a.maxWidth || 0); })[0];
+  const info = {
+    title: (e.title || e.name || '').replace(/\s+-\s+(En Vivo|Live|Acústico)$/i, ''),
+    artist: (e.artists || []).map(function (a) { return a.name; }).join(', '),
+    img: big ? 'https://i.scdn.co/image/' + big.url.split('/').pop() : '',
+    audio: e.audioPreview && e.audioPreview.url ? e.audioPreview.url : '',
+    link: 'https://open.spotify.com/track/' + m[1],
+    year: e.releaseDate && e.releaseDate.isoString ? e.releaseDate.isoString.slice(0, 4) : ''
+  };
+  console.log('  Spotify: ' + info.title + ' — ' + info.artist + (info.audio ? ' (con audio de muestra)' : ' (sin audio de muestra)'));
+  return info;
+}
+
+/* Audio: un enlace se usa tal cual; un archivo local se copia a assets/audio */
+function resolveAudio(src, slug) {
+  if (!src || src === true) return '';
+  if (/^https?:\/\//.test(src)) return src;
+  const abs = path.resolve(process.cwd(), src);
+  if (!fs.existsSync(abs)) fail('No encuentro el audio: ' + src);
+  const dir = path.join(ROOT, 'assets', 'audio');
+  fs.mkdirSync(dir, { recursive: true });
+  const dest = path.join(dir, slug + path.extname(abs).toLowerCase());
+  if (abs !== dest) fs.copyFileSync(abs, dest);
   return path.relative(ROOT, dest).split(path.sep).join('/');
 }
 
@@ -121,7 +161,17 @@ const commands = {
   build: function () { build(); },
   generar: function () { build(); },
 
-  'lanzamiento:agregar': function (o) {
+  'lanzamiento:agregar': async function (o) {
+    // Con --spotify se completan solos el título, artista, portada, año y audio de muestra
+    if (o.spotify && o.spotify !== true) {
+      const info = await spotifyTrack(o.spotify);
+      if (!o.titulo) o.titulo = info.title;
+      if (!o.artista) o.artista = info.artist;
+      if (!o.imagen) o.imagen = info.img;
+      if (!o.audio) o.audio = info.audio;
+      if (!o.link) o.link = info.link;
+      if (!o.tipo) o.tipo = 'Single' + (info.year ? ' · ' + info.year : '');
+    }
     need(o, ['titulo', 'artista']);
     const d = load();
     const slug = slugify(o.titulo);
@@ -134,6 +184,7 @@ const commands = {
       type: o.tipo && o.tipo !== true ? o.tipo : 'Single',
       img: resolveImage(o.imagen, slug),
       color: color,
+      audio: resolveAudio(o.audio, slug),
       link: o.link && o.link !== true ? o.link : ''
     };
     if (o.etiqueta && o.etiqueta !== true) rel.label = o.etiqueta;
@@ -220,8 +271,11 @@ function help() {
     '  node tools/omg.js lista',
     '',
     'Lanzamientos (los nuevos aparecen primero):',
+    '  La forma más fácil, con el enlace de la canción en Spotify (trae portada y audio):',
+    '  node tools/omg.js lanzamiento:agregar --spotify https://open.spotify.com/track/2EoR2N5XhU7HRJUjvxkzW2',
+    '  O a mano:',
     '  node tools/omg.js lanzamiento:agregar --titulo "Nombre" --artista "Artista" --imagen C:/ruta/portada.jpg',
-    '      opcionales: --tipo Single|EP|Álbum   --color yellow|teal|sky|white|blue',
+    '      opcionales: --tipo "Single · 2026"   --color yellow|teal|sky|white|blue   --audio C:/ruta/cancion.mp3',
     '                  --link https://open.spotify.com/...   --pos 2   --final   --pronto',
     '  node tools/omg.js lanzamiento:quitar "Tu Voluntad"      (o el número / slug)',
     '  node tools/omg.js lanzamiento:mover vivo-agradecido 1',
@@ -244,4 +298,4 @@ function help() {
 const opts = parseArgs(process.argv.slice(2));
 const cmd = opts._[0] || 'ayuda';
 if (!commands[cmd]) fail('Comando desconocido: ' + cmd + '. Ejecuta "node tools/omg.js ayuda".');
-commands[cmd](opts);
+Promise.resolve(commands[cmd](opts)).catch(function (e) { fail(e.message); });

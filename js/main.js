@@ -26,11 +26,15 @@
   renderStats();
   renderArtistPage();
   fillBands();
+  fillTickers();
+  fitLines();
+  initToTop();
 
   var hasGSAP = !!(window.gsap && window.ScrollTrigger);
   if (!hasGSAP) {
     document.documentElement.classList.remove('js');
     $$('[data-count]').forEach(function (el) { el.textContent = el.dataset.count; });
+    $$('.mb__video').forEach(function (v) { v.preload = 'auto'; v.autoplay = true; var p = v.play(); if (p && p.catch) p.catch(function () {}); });
     lazyEmbeds(true);
     return;
   }
@@ -47,6 +51,7 @@
   var lenis = null;
   if (window.Lenis) {
     lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+    window.__omgLenis = lenis;
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
     gsap.ticker.lagSmoothing(0);
@@ -206,9 +211,13 @@
     var text = el.textContent;
     el.textContent = '';
     text.split('').forEach(function (ch) {
+      // Dos capas: GSAP anima .char y el hover CSS mueve la capa interior,
+      // así las dos transformaciones nunca se pisan
       var s = document.createElement('span');
+      var inner = document.createElement('span');
       s.className = 'char';
-      s.textContent = ch === ' ' ? ' ' : ch;
+      inner.textContent = ch === ' ' ? ' ' : ch;
+      s.appendChild(inner);
       el.appendChild(s);
     });
     return $$('.char', el);
@@ -387,15 +396,52 @@
     var records = $$('.record');
     var playBtn = $('.player__btn', player);
     var link = $('.player__link', player);
+    var bar = $('.player__progress i', player);
     var PLAY = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4v16l14-8z"/></svg>';
     var PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>';
+    var LOADING = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M12 3a9 9 0 1 0 9 9"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur=".8s" repeatCount="indefinite"/></path></svg>';
+    var audio = new Audio();
+    audio.preload = 'none';
     var current = null;
 
-    function setPaused(paused) {
+    // La interfaz refleja siempre el estado real del audio
+    function sync() {
+      var paused = audio.paused;
       player.classList.toggle('is-paused', paused);
       playBtn.innerHTML = paused ? PLAY : PAUSE;
       playBtn.setAttribute('aria-label', paused ? 'Reproducir' : 'Pausar');
       records.forEach(function (r) { r.classList.toggle('is-playing', !paused && r === current); });
+    }
+    ['play', 'playing', 'pause', 'ended'].forEach(function (ev) { audio.addEventListener(ev, sync); });
+    audio.addEventListener('waiting', function () { playBtn.innerHTML = LOADING; });
+    audio.addEventListener('timeupdate', function () {
+      if (audio.duration) bar.style.transform = 'scaleX(' + (audio.currentTime / audio.duration) + ')';
+    });
+    audio.addEventListener('ended', function () { bar.style.transform = 'scaleX(1)'; });
+
+    function playRecord(rec) {
+      current = rec;
+      $('.player__txt b', player).textContent = rec.dataset.title;
+      $('.player__txt small', player).textContent = rec.dataset.artist;
+      $('.player__art img', player).src = rec.dataset.img;
+      if (link) {
+        link.hidden = !rec.dataset.link;
+        if (rec.dataset.link) link.href = rec.dataset.link;
+      }
+      player.classList.add('is-visible');
+      bar.style.transform = 'scaleX(0)';
+      if (rec.dataset.audio) {
+        audio.src = rec.dataset.audio;
+        playBtn.innerHTML = LOADING;
+        var p = audio.play();
+        if (p && p.catch) p.catch(sync);
+      } else {
+        // Sin audio de muestra: se abre la canción en Spotify
+        audio.removeAttribute('src');
+        audio.load();
+        sync();
+        if (rec.dataset.link) window.open(rec.dataset.link, '_blank', 'noopener');
+      }
     }
 
     records.forEach(function (rec) {
@@ -404,25 +450,19 @@
           gsap.fromTo(rec, { x: -8 }, { x: 0, duration: 0.8, ease: 'elastic.out(1, 0.3)' });
           return;
         }
-        if (current === rec && !player.classList.contains('is-paused')) { setPaused(true); return; }
-        current = rec;
-        $('.player__txt b', player).textContent = rec.dataset.title;
-        $('.player__txt small', player).textContent = rec.dataset.artist;
-        $('.player__art img', player).src = rec.dataset.img;
-        if (link) {
-          link.hidden = !rec.dataset.link;
-          if (rec.dataset.link) link.href = rec.dataset.link;
+        if (current === rec && audio.src) {
+          if (audio.paused) audio.play(); else audio.pause();
+          return;
         }
-        player.classList.add('is-visible');
-        setPaused(false);
+        playRecord(rec);
       });
     });
     playBtn.addEventListener('click', function () {
-      if (!current) current = records[0];
-      setPaused(!player.classList.contains('is-paused'));
+      if (!current) { if (records[0]) playRecord(records[0]); return; }
+      if (audio.paused) audio.play(); else audio.pause();
     });
     $('.player__close', player).addEventListener('click', function () {
-      setPaused(true);
+      audio.pause();
       player.classList.remove('is-visible');
     });
 
@@ -453,9 +493,23 @@
     var mb = $('.mb');
     if (!mb) return;
     var lines = $$('.mb__title .line > span');
-    // Todo el texto empieza oculto: al principio sólo se ve la foto
+    // Todo el texto empieza oculto: al principio sólo se ve el video
     gsap.set(lines, { yPercent: 150, opacity: 0 });
-    gsap.set(['.mb__label', '.mb__sub', '.mb__ctas'], { opacity: 0, y: 30 });
+    gsap.set(['.mb__corners', '.mb__sub', '.mb__ctas'], { opacity: 0, y: 30 });
+
+    // El video sólo se carga y reproduce cuando la sección está cerca de la pantalla
+    var video = $('.mb__video');
+    if (video) {
+      ScrollTrigger.create({
+        trigger: mb, start: 'top 160%', end: 'bottom -60%',
+        onToggle: function (self) {
+          if (self.isActive) {
+            if (video.preload !== 'auto') video.preload = 'auto';
+            var p = video.play(); if (p && p.catch) p.catch(function () {});
+          } else video.pause();
+        }
+      });
+    }
 
     var mm = gsap.matchMedia();
     mm.add({ desk: '(min-width: 861px)', mob: '(max-width: 860px)' }, function (ctx) {
@@ -464,8 +518,8 @@
         scrollTrigger: { trigger: mb, start: 'top top', end: '+=170%', pin: true, scrub: 1.2, anticipatePin: 1 }
       });
       tl.fromTo('.mb__frame', { clipPath: start }, { clipPath: 'inset(0% 0% 0% 0% round 0px)', ease: 'power2.inOut', duration: 1 })
-        .fromTo('.mb__frame img', { scale: 1.35, yPercent: 6 }, { scale: 1, yPercent: 0, ease: 'power2.inOut', duration: 1 }, 0)
-        .to('.mb__label', { opacity: 1, y: 0, duration: 0.3 }, 0.7)
+        .fromTo('.mb__video', { scale: 1.35, yPercent: 6 }, { scale: 1, yPercent: 0, ease: 'power2.inOut', duration: 1 }, 0)
+        .to('.mb__corners', { opacity: 1, y: 0, duration: 0.3 }, 0.7)
         .to(lines, { yPercent: 0, opacity: 1, stagger: 0.14, duration: 0.55, ease: 'power3.out' }, 0.75)
         .to(['.mb__sub', '.mb__ctas'], { opacity: 1, y: 0, stagger: 0.1, duration: 0.4 }, 1.2)
         .to({}, { duration: 0.35 });
@@ -518,9 +572,6 @@
     start: 'top 90%',
     onEnter: function (els) { gsap.to(els, { opacity: 1, y: 0, stagger: 0.08, duration: 1.1, ease: 'expo.out' }); }
   });
-
-  // Logo gigante del footer
-  gsap.from('.footer__giant > *', { yPercent: 100, opacity: 0, stagger: 0.08, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: '.footer__giant', start: 'top 95%' } });
 
   lazyEmbeds(false);
 
@@ -641,13 +692,15 @@
       return '' +
         '<button class="record reveal-up' + (soon ? ' record--soon' : '') + '" style="--c: var(--' + esc(r.color || 'blue') + ')"' +
           ' data-title="' + esc(r.title) + '" data-artist="' + esc(r.artist) + '" data-img="' + esc(r.img) + '"' +
-          ' data-link="' + esc(r.link || '') + '" data-cursor="' + (soon ? 'PRONTO' : 'PLAY') + '">' +
+          ' data-link="' + esc(r.link || '') + '" data-audio="' + esc(r.audio || '') + '"' +
+          ' data-cursor="' + (soon ? 'PRONTO' : 'PLAY') + '" aria-label="' + (soon ? 'Próximamente' : 'Escuchar ' + esc(r.title) + ' de ' + esc(r.artist)) + '">' +
           '<span class="record__stage">' +
             '<span class="record__vinyl"><span class="spin"></span></span>' +
-            '<span class="record__cover"><img src="' + esc(r.img) + '" alt="" loading="lazy" decoding="async">' +
-              '<span class="record__title">' + esc(r.title) + '<small>' + esc(r.artist) + '</small></span></span>' +
+            // Las portadas reales ya traen su título; sólo "próximamente" lleva texto encima
+            '<span class="record__cover"><img src="' + esc(r.img) + '" alt="Portada de ' + esc(r.title) + '" loading="lazy" decoding="async">' +
+              (soon ? '<span class="record__title">' + esc(r.title) + '<small>' + esc(r.artist) + '</small></span>' : '') + '</span>' +
           '</span>' +
-          '<span class="record__meta"><b>' + esc(r.label || r.title) + '</b><span>' + esc(r.type) + '</span></span>' +
+          '<span class="record__meta"><b>' + esc(r.label || r.title) + '</b><span>' + esc(r.artist) + ' · ' + esc(r.type) + '</span></span>' +
         '</button>';
     }).join('');
   }
@@ -689,6 +742,63 @@
     $$('.band__track').forEach(function (track) {
       // Copias idénticas para que el bucle sea continuo
       track.innerHTML = chunk + chunk + chunk + chunk;
+    });
+  }
+
+  /* Ticker infinito: repite el texto hasta que cada mitad sea más ancha que la pantalla,
+     así al llegar a -50% el bucle empieza exactamente donde estaba y nunca se ve el corte */
+  function fillTickers() {
+    $$('[data-ticker]').forEach(function (track) {
+      var text = track.dataset.ticker;
+      var build = function () {
+        track.innerHTML = '<span>' + esc(text) + '</span>';
+        var unit = track.firstChild.getBoundingClientRect().width || 400;
+        var copies = Math.max(2, Math.ceil((window.innerWidth * 1.2) / unit));
+        var half = new Array(copies + 1).join('<span>' + esc(text) + '</span>');
+        track.innerHTML = half + half;
+        // Velocidad constante (~70px/s) sin importar el ancho
+        track.style.setProperty('--ticker-time', ((unit * copies) / 70).toFixed(1) + 's');
+      };
+      build();
+      var t;
+      window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(build, 200); });
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(build);
+    });
+  }
+
+  /* Escala una línea para que mida lo mismo que otra (p. ej. "4 años" = ancho de "hablando").
+     Se mide sin transformaciones para que las animaciones de entrada no alteren el cálculo. */
+  function fitLines() {
+    var items = $$('[data-fit-to]');
+    if (!items.length) return;
+    var fit = function () {
+      items.forEach(function (el) {
+        var ref = $(el.dataset.fitTo);
+        if (!ref) return;
+        // El tamaño va en la línea contenedora para que su altura (y la máscara) crezcan con el texto
+        var box = el.closest('.line') || el;
+        box.style.fontSize = '';
+        var w = el.scrollWidth, target = ref.scrollWidth;
+        if (w && target) box.style.fontSize = (target / w).toFixed(3) + 'em';
+      });
+      if (window.ScrollTrigger) ScrollTrigger.refresh();
+    };
+    fit();
+    var t;
+    window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(fit, 200); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  }
+
+  /* Botón fijo para volver arriba */
+  function initToTop() {
+    var btn = $('.to-top');
+    if (!btn) return;
+    var update = function () { btn.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.8); };
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+    btn.addEventListener('click', function () {
+      if (window.__omgLenis) window.__omgLenis.scrollTo(0, { duration: 1.8, easing: function (t) { return 1 - Math.pow(1 - t, 4); } });
+      else window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 

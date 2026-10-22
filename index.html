@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/Krick-Bold.otf" as="font" type="font/otf" crossorigin>
   <link rel="stylesheet" href="css/styles.css">
 
   <script>
@@ -100,7 +101,7 @@
     <!-- ===== HERO ===== -->
     <section class="hero" data-bg="blue" aria-label="Inicio">
       <svg class="hero__squiggle" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <path d="M-60 250 C 80 190 200 110 310 150 C 430 195 400 330 310 330 C 220 330 240 215 390 205 C 540 195 570 250 700 240 C 840 230 820 420 930 430 C 1040 440 1060 300 1010 270 C 960 240 920 320 990 360 C 1090 420 1230 300 1290 180 C 1330 100 1420 90 1520 130"/>
+        <path d="M-60 70 C 160 20 360 40 560 70 C 700 92 760 60 820 110 C 900 180 860 330 930 420 C 1000 520 1080 600 1000 640 C 920 680 880 560 980 520 C 1100 470 1220 330 1290 200 C 1340 110 1420 80 1520 100"/>
       </svg>
 
       <div class="hero__copy">
@@ -160,14 +161,8 @@
     <section class="section manifesto" data-bg="ink" id="nosotros">
       <p class="eyebrow kicker"><b>01</b> Quiénes somos</p>
       <p class="manifesto__text" data-words>
-        Somos <span class="hl-word">One Music Global</span>, una compañía boutique que impulsa a los artistas y sellos que están definiendo la música cristiana latina <span class="chip"><img src="assets/img/p13.jpg" alt=""></span>. Del primer demo <span class="chip"><img src="assets/img/p6.jpg" alt=""></span> al escenario más grande, con estrategia, cercanía y mucho <span class="hl-word">propósito</span>.
+        Somos <span class="hl-word">One Music Global</span>, una compañía boutique que impulsa a los artistas y sellos que están definiendo la música cristiana latina. Del primer demo al escenario más grande, con estrategia, cercanía y mucho <span class="hl-word">propósito</span>.
       </p>
-      <div class="manifesto__aside">
-        <p class="hand">
-          <svg viewBox="0 0 60 40" aria-hidden="true"><path d="M4 30 C 18 6, 34 4, 52 14 M44 6 L53 14 L44 22"/></svg>
-          una sola familia, dos casas: Global &amp; Publishing
-        </p>
-      </div>
     </section>
 
     <!-- ===== Roster ===== -->
@@ -265,7 +260,7 @@
           <p class="eyebrow kicker"><b>04</b> Lo más nuevo</p>
           <h2 class="display">Lanzamientos<span class="sticker">NUEVA<br>MÚSICA</span></h2>
         </div>
-        <p>Pasa el cursor por un disco o tócalo para escucharlo en el reproductor.</p>
+        <p>Toca un disco para escuchar un adelanto en el reproductor.</p>
       </div>
 
       <!-- Los discos se generan desde content/content.json (node tools/omg.js ayuda) -->
@@ -280,13 +275,21 @@
 
     <!-- ===== Music Business ===== -->
     <section class="mb" data-bg="ink" id="music-business">
-      <div class="mb__frame"><img src="assets/img/p8.jpg" alt="Concierto de adoración con el público levantando las manos"></div>
+      <!-- Video del recap de Music Business 104 (@onemusicglobal). Sin sonido, en bucle y en blanco y negro. -->
+      <div class="mb__frame">
+        <video class="mb__video" src="assets/video/music-business-recap.mp4" muted loop playsinline preload="none" disablepictureinpicture disableremoteplayback aria-hidden="true" tabindex="-1"></video>
+      </div>
+      <!-- "Music" se escala desde JS para medir lo mismo que "Business" -->
+      <p class="mb__corners mb__kicker">
+        <span class="line"><span data-fit-to=".mb__kicker-ref">Music</span></span>
+        <span class="line"><span class="mb__kicker-ref">Business</span></span>
+      </p>
       <div class="mb__content">
-        <span class="mb__label">Music Business</span>
-        <h2 class="display mb__title">
-          <span class="line"><span>4 años</span></span>
-          <span class="line"><span class="hl">hablando</span></span>
-          <span class="line"><span class="hl-box">del negocio de la música</span></span>
+        <h2 class="mb__title">
+          <!-- "4 años" se escala desde JS para que mida lo mismo que "hablando", como en el post -->
+          <span class="line mb__fit"><span data-fit-to=".mb__fit-ref">4 años</span></span>
+          <span class="line"><span class="mb__fit-ref">hablando</span></span>
+          <span class="line mb__line-box"><span class="mb__box">del negocio de la música</span></span>
         </h2>
         <p class="mb__sub">Cuatro ediciones después, la conversación sigue. Conferencias para músicos, compositores y equipos que quieren profesionalizar su ministerio.</p>
         <div class="mb__ctas">
@@ -299,7 +302,8 @@
           </a>
         </div>
       </div>
-      <div class="mb__ticker" aria-hidden="true"><div>Music Business 101 ✦ Music Business 102 ✦ Music Business 103 ✦ Music Business 104 ✦ La conversación sigue ✦ Music Business 101 ✦ Music Business 102 ✦ Music Business 103 ✦ Music Business 104 ✦ La conversación sigue ✦ </div></div>
+      <!-- El texto se repite desde JS las veces necesarias para que el bucle nunca se corte -->
+      <div class="mb__ticker" aria-hidden="true"><div class="mb__ticker-track" data-ticker="Music Business 101 ✦ Music Business 102 ✦ Music Business 103 ✦ Music Business 104 ✦ La conversación sigue ✦ "></div></div>
     </section>
 
     <!-- ===== Dos casas ===== -->
@@ -365,8 +369,9 @@
       </svg>
       <p class="eyebrow kicker" style="justify-self:center"><b>07</b> Trabajemos juntos</p>
       <h2 class="display contact__title" data-chars>
-        <span class="line"><span>Hagamos</span></span>
-        <span class="line"><span class="hl">ruido</span></span>
+        <span class="line"><span class="contact__fit-ref">Hagamos</span></span>
+        <!-- "Ruido" se escala desde JS para medir lo mismo que "Hagamos" -->
+        <span class="line"><span class="hl" data-fit-to=".contact__fit-ref">ruido</span></span>
       </h2>
       <p class="contact__lead">¿Eres artista, sello o manager? Cuéntanos tu proyecto. Escuchamos cada propuesta con atención.</p>
       <div class="contact__ctas">
@@ -420,21 +425,28 @@
         </ul>
       </div>
     </div>
-    <div class="display footer__giant" aria-hidden="true">
-      <span>ONE</span><svg class="logo-m" viewBox="0 0 26 20"><path class="m1" d="M0 0 13 11 0 20Z"/><path class="m2" d="M26 0 13 11 26 20Z"/></svg><span>USIC</span>
-    </div>
     <div class="footer__base">
       <span>© 2026 One Music Global. Todos los derechos reservados.</span>
+      <a href="index.html" class="logo footer__logo" aria-label="One Music Global — inicio">
+        ONE<svg class="logo-m" viewBox="0 0 26 20" aria-hidden="true"><path class="m1" d="M0 0 13 11 0 20Z"/><path class="m2" d="M26 0 13 11 26 20Z"/></svg>USIC
+        <small>GLOBAL</small>
+      </a>
       <span>Música con propósito ✦ Hecho con fe</span>
     </div>
   </footer>
 
+  <!-- ===== Volver arriba ===== -->
+  <button class="to-top" aria-label="Volver al inicio" data-cursor="ARRIBA">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
   <!-- ===== Mini reproductor ===== -->
   <div class="player is-paused" role="region" aria-label="Reproductor">
+    <span class="player__progress" aria-hidden="true"><i></i></span>
     <div class="player__art"><img src="assets/img/p19.jpg" alt=""></div>
-    <div class="player__txt"><b>Tu Voluntad</b><small>Raisa Díaz</small></div>
+    <div class="player__txt"><b>—</b><small>—</small></div>
     <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-    <a class="player__link" href="#" target="_blank" rel="noopener" hidden>Escuchar ↗</a>
+    <a class="player__link" href="#" target="_blank" rel="noopener" hidden>Spotify ↗</a>
     <button class="player__btn" aria-label="Pausar"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg></button>
     <button class="player__close" aria-label="Cerrar reproductor"><svg viewBox="0 0 24 24" width="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
   </div>
