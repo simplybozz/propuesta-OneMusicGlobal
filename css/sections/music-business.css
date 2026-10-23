@@ -90,7 +90,7 @@
   font-family: "Krick", var(--f-display);
   font-weight: 700;
   text-transform: uppercase;
-  font-size: clamp(3.4rem, min(12vw, 15vh), 12rem);
+  font-size: clamp(6.4rem, min(12vw, 15vh), 12rem);
   line-height: .74;
   color: var(--mb-yellow);
   letter-spacing: .005em;
