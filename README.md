@@ -58,3 +58,8 @@ Activación, uso, reglas de escritura y tamaños de imagen: **[docs/CMS.md](docs
 La página sale en español por defecto. El selector ES / EN de la barra cambia el idioma y lo recuerda en el navegador. Para compartir la versión en inglés directamente: `index.html?lang=en`.
 
 Cada texto del contenido tiene su versión `_es` y `_en`. Si falta el inglés, se muestra el español.
+
+
+## Licencia
+
+© 2026 simplybozz. Todos los derechos reservados. Que el repositorio sea público no da permiso para copiar ni usar el código. Ver [LICENSE](LICENSE).
