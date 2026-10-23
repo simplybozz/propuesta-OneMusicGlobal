@@ -183,6 +183,7 @@
   setTheme(OMG.page === 'artist' ? 'ink' : 'blue', true);
 
   var curtainPanels = $$('.curtain > span');
+  gsap.set(curtainPanels, { y: 0, yPercent: 100 });
   var loader = $('.loader');
   var cameFromTransition = sessionStorage.getItem('omg-transition') === '1';
   var seenLoader = sessionStorage.getItem('omg-loaded') === '1';
@@ -203,10 +204,9 @@
     }
     gsap.set(curtainPanels, { yPercent: 0 });
     gsap.to(curtainPanels.slice().reverse(), {
-      yPercent: -100, duration: 1.1, stagger: 0.09, ease: 'expo.inOut', delay: 0.15,
-      onComplete: function () { gsap.set(curtainPanels, { yPercent: 100 }); }
+      yPercent: 100, duration: 1.4, stagger: 0.12, ease: 'expo.inOut', delay: 0.2
     });
-    gsap.delayedCall(0.6, playIntro);
+    gsap.delayedCall(0.8, playIntro);
   } else if (loader && !seenLoader) {
     if (lenis) lenis.stop();
     var counter = { v: 0 };
@@ -227,9 +227,8 @@
       .add(function () { gsap.set(curtainPanels, { yPercent: 0 }); })
       .to(loader, { yPercent: -100, duration: 1, ease: 'expo.inOut' })
       .add(function () { loader.remove(); })
-      .to(curtainPanels.slice().reverse(), { yPercent: -100, duration: 1, stagger: 0.09, ease: 'expo.inOut' }, '-=0.55')
-      .add(function () { gsap.set(curtainPanels, { yPercent: 100 }); })
-      .add(playIntro, '-=0.9');
+      .to(curtainPanels.slice().reverse(), { yPercent: 100, duration: 1.4, stagger: 0.12, ease: 'expo.inOut' }, '+=0.1')
+      .add(playIntro, '-=1.1');
   } else {
     if (loader) loader.remove();
     playIntro();
