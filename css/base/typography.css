@@ -39,6 +39,10 @@
   margin: -.14em 0 -.04em;
 }
 
+.tumusica {
+  margin: -.10em 0 -.04em !important;
+}
+
 .line>span {
   display: inline-block;
   will-change: transform;
