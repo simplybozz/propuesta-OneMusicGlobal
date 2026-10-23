@@ -1,4 +1,12 @@
 OMG.register('contact', {
+  render: function () {
+    var mail = OMG.$('[data-mail]');
+    var email = OMG.c('contact.email');
+    if (!mail || !email) return;
+    var subject = OMG.c('contact.email_subject');
+    mail.href = 'mailto:' + email + (subject ? '?subject=' + encodeURIComponent(subject) : '');
+  },
+
   init: function () {
     var title = OMG.$('.contact [data-chars]');
     if (!title) return;

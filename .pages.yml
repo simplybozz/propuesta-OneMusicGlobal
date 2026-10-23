@@ -1,0 +1,479 @@
+media:
+  - name: images
+    label: Imágenes
+    input: assets/img
+    output: /assets/img
+    categories: [image]
+    rename: safe
+  - name: audio
+    label: Audios
+    input: assets/audio
+    output: /assets/audio
+    categories: [audio]
+    rename: safe
+  - name: video
+    label: Videos
+    input: assets/video
+    output: /assets/video
+    categories: [video]
+    rename: safe
+
+content:
+  - name: home
+    label: Página de inicio
+    type: group
+    items:
+
+      - name: hero
+        label: 1. Portada (hero)
+        type: file
+        path: content/home/hero.json
+        format: json
+        fields:
+          - { name: eyebrow_es, label: 'Texto pequeño superior (ES)', type: string }
+          - { name: eyebrow_en, label: 'Texto pequeño superior (EN)', type: string }
+          - { name: line1_es, label: 'Título línea 1 (ES)', type: string }
+          - { name: line1_en, label: 'Título línea 1 (EN)', type: string }
+          - { name: highlight_es, label: 'Palabra amarilla con círculo (ES)', type: string, description: 'Una sola palabra corta.' }
+          - { name: highlight_en, label: 'Palabra amarilla con círculo (EN)', type: string }
+          - { name: note_es, label: 'Nota escrita a mano (ES)', type: string }
+          - { name: note_en, label: 'Nota escrita a mano (EN)', type: string }
+          - { name: line3_es, label: 'Título línea 3 (ES)', type: string }
+          - { name: line3_en, label: 'Título línea 3 (EN)', type: string }
+          - { name: lead_es, label: 'Párrafo (ES)', type: text }
+          - { name: lead_en, label: 'Párrafo (EN)', type: text }
+          - { name: button_1_es, label: 'Botón amarillo (ES)', type: string }
+          - { name: button_1_en, label: 'Botón amarillo (EN)', type: string }
+          - { name: button_2_es, label: 'Botón con borde (ES)', type: string }
+          - { name: button_2_en, label: 'Botón con borde (EN)', type: string }
+          - { name: scroll_es, label: 'Texto "Desliza" (ES)', type: string }
+          - { name: scroll_en, label: 'Texto "Desliza" (EN)', type: string }
+          - { name: badge_es, label: 'Texto del círculo giratorio (ES)', type: string, description: "Termina con ✦ y un espacio para que el texto cierre bien el círculo." }
+          - { name: badge_en, label: 'Texto del círculo giratorio (EN)', type: string }
+          - name: photo_1
+            label: Foto 1 (izquierda)
+            type: object
+            fields:
+              - { name: image, label: 'Imagen', type: image, options: { media: images } }
+              - { name: caption_es, label: 'Texto debajo (ES)', type: string }
+              - { name: caption_en, label: 'Texto debajo (EN)', type: string }
+          - name: photo_2
+            label: Foto 2 (derecha)
+            type: object
+            fields:
+              - { name: image, label: 'Imagen', type: image, options: { media: images } }
+              - { name: caption_es, label: 'Texto debajo (ES)', type: string }
+              - { name: caption_en, label: 'Texto debajo (EN)', type: string }
+          - name: photo_3
+            label: Foto 3 (abajo)
+            type: object
+            fields:
+              - { name: image, label: 'Imagen', type: image, options: { media: images } }
+              - { name: caption_es, label: 'Texto debajo (ES)', type: string }
+              - { name: caption_en, label: 'Texto debajo (EN)', type: string }
+
+      - name: bands
+        label: 2. Cintas amarilla y turquesa
+        type: file
+        path: content/home/bands.json
+        format: json
+        fields:
+          - name: items
+            label: Frases de las cintas
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{text_es}"
+            fields:
+              - { name: text_es, label: 'Texto (ES)', type: string }
+              - { name: text_en, label: 'Texto (EN)', type: string }
+
+      - name: about
+        label: 3. Quiénes somos
+        type: file
+        path: content/home/about.json
+        format: json
+        fields:
+          - { name: kicker_es, label: 'Etiqueta de la sección (ES)', type: string }
+          - { name: kicker_en, label: 'Etiqueta de la sección (EN)', type: string }
+          - { name: text_es, label: 'Texto grande (ES)', type: text, description: "Escribe *entre asteriscos* las palabras que van resaltadas." }
+          - { name: text_en, label: 'Texto grande (EN)', type: text }
+
+      - name: roster
+        label: 4. Roster (textos de la sección)
+        type: file
+        path: content/home/roster.json
+        format: json
+        fields:
+          - { name: kicker_es, label: 'Etiqueta de la sección (ES)', type: string }
+          - { name: kicker_en, label: 'Etiqueta de la sección (EN)', type: string }
+          - { name: title_es, label: 'Título (ES)', type: string, description: "Escribe *entre asteriscos* la palabra amarilla." }
+          - { name: title_en, label: 'Título (EN)', type: string }
+          - { name: ghost, label: 'Palabra gigante de fondo', type: string }
+          - { name: card_more_es, label: 'Texto de cada tarjeta (ES)', type: string }
+          - { name: card_more_en, label: 'Texto de cada tarjeta (EN)', type: string }
+          - { name: cta_eyebrow_es, label: 'Última tarjeta, texto pequeño (ES)', type: string }
+          - { name: cta_eyebrow_en, label: 'Última tarjeta, texto pequeño (EN)', type: string }
+          - { name: cta_title_es, label: 'Última tarjeta, título (ES)', type: text, description: 'Cada línea es un salto de línea.' }
+          - { name: cta_title_en, label: 'Última tarjeta, título (EN)', type: text }
+          - { name: cta_button_es, label: 'Última tarjeta, botón (ES)', type: string }
+          - { name: cta_button_en, label: 'Última tarjeta, botón (EN)', type: string }
+
+      - name: services
+        label: 5. Qué hacemos (servicios)
+        type: file
+        path: content/home/services.json
+        format: json
+        fields:
+          - { name: kicker_es, label: 'Etiqueta de la sección (ES)', type: string }
+          - { name: kicker_en, label: 'Etiqueta de la sección (EN)', type: string }
+          - { name: title_es, label: 'Título (ES)', type: text, description: 'Cada línea es un salto de línea.' }
+          - { name: title_en, label: 'Título (EN)', type: text }
+          - { name: lead_es, label: 'Párrafo (ES)', type: text }
+          - { name: lead_en, label: 'Párrafo (EN)', type: text }
+          - name: items
+            label: Tarjetas
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{title_es}"
+            fields:
+              - { name: title_es, label: 'Título (ES)', type: string, description: "Escribe *entre asteriscos* la palabra amarilla." }
+              - { name: title_en, label: 'Título (EN)', type: string }
+              - { name: text_es, label: 'Texto (ES)', type: text, description: "Escribe *entre asteriscos* lo que va en negrita." }
+              - { name: text_en, label: 'Texto (EN)', type: text }
+              - { name: tags_es, label: 'Etiquetas (ES)', type: string, description: 'Separadas por comas.' }
+              - { name: tags_en, label: 'Etiquetas (EN)', type: string }
+              - { name: image, label: 'Imagen', type: image, options: { media: images } }
+              - { name: alt_es, label: 'Descripción de la imagen (ES)', type: string, description: 'Para buscadores y lectores de pantalla.' }
+              - { name: alt_en, label: 'Descripción de la imagen (EN)', type: string }
+              - name: color
+                label: Color de la tarjeta
+                type: select
+                options:
+                  values:
+                    - { name: yellow, label: 'Amarillo' }
+                    - { name: blue, label: 'Azul' }
+                    - { name: teal, label: 'Turquesa' }
+                    - { name: ink, label: 'Azul oscuro' }
+                    - { name: white, label: 'Blanco' }
+
+      - name: releases
+        label: 6. Lanzamientos
+        type: file
+        path: content/home/releases.json
+        format: json
+        fields:
+          - { name: kicker_es, label: 'Etiqueta de la sección (ES)', type: string }
+          - { name: kicker_en, label: 'Etiqueta de la sección (EN)', type: string }
+          - { name: title_es, label: 'Título (ES)', type: string }
+          - { name: title_en, label: 'Título (EN)', type: string }
+          - { name: sticker_es, label: 'Sticker redondo (ES)', type: text, description: 'Dos líneas cortas.' }
+          - { name: sticker_en, label: 'Sticker redondo (EN)', type: text }
+          - { name: lead_es, label: 'Párrafo (ES)', type: text }
+          - { name: lead_en, label: 'Párrafo (EN)', type: text }
+          - name: items
+            label: Discos
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{title} — {artist}"
+            fields:
+              - { name: title, label: 'Nombre de la canción', type: string, required: true }
+              - { name: artist, label: 'Artista', type: string }
+              - { name: type_es, label: 'Tipo y año (ES)', type: string, description: "Ejemplo: Single · 2025" }
+              - { name: type_en, label: 'Tipo y año (EN)', type: string, description: "Ejemplo: Live · 2024" }
+              - { name: cover, label: 'Portada (cuadrada)', type: image, options: { media: images, path: assets/img/releases } }
+              - { name: audio, label: 'Audio del adelanto (archivo MP3)', type: file, options: { media: audio } }
+              - { name: audio_url, label: 'Audio del adelanto (enlace)', type: string, description: 'Solo si no subes un archivo.' }
+              - { name: spotify, label: 'Enlace de Spotify', type: string }
+              - name: color
+                label: Color del disco
+                type: select
+                options:
+                  values:
+                    - { name: yellow, label: 'Amarillo' }
+                    - { name: teal, label: 'Turquesa' }
+                    - { name: sky, label: 'Celeste' }
+                    - { name: blue, label: 'Azul' }
+                    - { name: white, label: 'Blanco' }
+              - { name: soon, label: 'Próximamente', type: boolean, description: 'Muestra el disco como "pronto" y no reproduce audio.' }
+
+      - name: stats
+        label: 7. Cifras
+        type: file
+        path: content/home/stats.json
+        format: json
+        fields:
+          - name: items
+            label: Cifras
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{value}{suffix} {label_es}"
+            fields:
+              - { name: value, label: 'Número', type: number }
+              - { name: suffix, label: 'Símbolo después del número', type: string, description: "Ejemplo: + o K. Puede quedar vacío." }
+              - { name: label_es, label: 'Texto (ES)', type: string }
+              - { name: label_en, label: 'Texto (EN)', type: string }
+
+      - name: music-business
+        label: 8. Music Business
+        type: file
+        path: content/home/music-business.json
+        format: json
+        fields:
+          - { name: corner_1, label: 'Logo superior, línea 1', type: string }
+          - { name: corner_2, label: 'Logo superior, línea 2', type: string }
+          - { name: line1_es, label: 'Título línea 1 (ES)', type: string }
+          - { name: line1_en, label: 'Título línea 1 (EN)', type: string }
+          - { name: line2_es, label: 'Título línea 2 (ES)', type: string }
+          - { name: line2_en, label: 'Título línea 2 (EN)', type: string }
+          - { name: box_es, label: 'Texto en la caja amarilla (ES)', type: string }
+          - { name: box_en, label: 'Texto en la caja amarilla (EN)', type: string }
+          - { name: text_es, label: 'Párrafo (ES)', type: text }
+          - { name: text_en, label: 'Párrafo (EN)', type: text }
+          - { name: button_es, label: 'Botón (ES)', type: string }
+          - { name: button_en, label: 'Botón (EN)', type: string }
+          - { name: button_url, label: 'Enlace del botón', type: string }
+          - { name: video, label: 'Video de fondo (MP4, sin sonido)', type: file, options: { media: video } }
+          - name: ticker
+            label: Texto que corre abajo
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{text_es}"
+            fields:
+              - { name: text_es, label: 'Texto (ES)', type: string }
+              - { name: text_en, label: 'Texto (EN)', type: string }
+
+      - name: houses
+        label: 9. El ecosistema (Global y Publishing)
+        type: file
+        path: content/home/houses.json
+        format: json
+        fields:
+          - { name: kicker_es, label: 'Etiqueta de la sección (ES)', type: string }
+          - { name: kicker_en, label: 'Etiqueta de la sección (EN)', type: string }
+          - { name: title_es, label: 'Título (ES)', type: text, description: "Cada línea es un salto de línea. *Entre asteriscos* va en amarillo." }
+          - { name: title_en, label: 'Título (EN)', type: text }
+          - { name: lead_es, label: 'Párrafo (ES)', type: text }
+          - { name: lead_en, label: 'Párrafo (EN)', type: text }
+          - name: global
+            label: Tarjeta Global
+            type: object
+            fields:
+              - { name: image, label: 'Imagen', type: image, options: { media: images } }
+              - { name: badge_es, label: 'Etiqueta (ES)', type: string }
+              - { name: badge_en, label: 'Etiqueta (EN)', type: string }
+              - { name: title, label: 'Título', type: string }
+              - { name: text_es, label: 'Texto (ES)', type: text }
+              - { name: text_en, label: 'Texto (EN)', type: text }
+              - { name: link_es, label: 'Enlace, texto (ES)', type: string }
+              - { name: link_en, label: 'Enlace, texto (EN)', type: string }
+          - name: publishing
+            label: Tarjeta Publishing
+            type: object
+            fields:
+              - { name: image, label: 'Imagen', type: image, options: { media: images } }
+              - { name: badge_es, label: 'Etiqueta (ES)', type: string }
+              - { name: badge_en, label: 'Etiqueta (EN)', type: string }
+              - { name: title, label: 'Título', type: string }
+              - { name: text_es, label: 'Texto (ES)', type: text }
+              - { name: text_en, label: 'Texto (EN)', type: text }
+              - { name: link_es, label: 'Enlace, texto (ES)', type: string, description: "La dirección del enlace se cambia en General → Enlaces y redes." }
+              - { name: link_en, label: 'Enlace, texto (EN)', type: string }
+
+      - name: playlist
+        label: 10. One's Playlist
+        type: file
+        path: content/home/playlist.json
+        format: json
+        fields:
+          - { name: kicker_es, label: 'Etiqueta de la sección (ES)', type: string }
+          - { name: kicker_en, label: 'Etiqueta de la sección (EN)', type: string }
+          - { name: title_1, label: 'Título línea 1', type: string }
+          - { name: title_2, label: 'Título línea 2', type: string }
+          - { name: lead_es, label: 'Párrafo (ES)', type: text }
+          - { name: lead_en, label: 'Párrafo (EN)', type: text }
+          - { name: playlist_url, label: 'Enlace de la playlist de Spotify', type: string, description: "Pega el enlace normal de Spotify (open.spotify.com/playlist/...). El reproductor se actualiza solo." }
+          - { name: button_es, label: 'Botón principal (ES)', type: string }
+          - { name: button_en, label: 'Botón principal (EN)', type: string }
+          - { name: button_2, label: 'Segundo botón, texto', type: string }
+          - { name: button_2_url, label: 'Segundo botón, enlace', type: string }
+
+      - name: contact
+        label: 11. Contacto
+        type: file
+        path: content/home/contact.json
+        format: json
+        fields:
+          - { name: kicker_es, label: 'Etiqueta de la sección (ES)', type: string }
+          - { name: kicker_en, label: 'Etiqueta de la sección (EN)', type: string }
+          - { name: line1_es, label: 'Título línea 1 (ES)', type: string }
+          - { name: line1_en, label: 'Título línea 1 (EN)', type: string }
+          - { name: line2_es, label: 'Título línea 2, amarilla (ES)', type: string }
+          - { name: line2_en, label: 'Título línea 2, amarilla (EN)', type: string }
+          - { name: lead_es, label: 'Párrafo (ES)', type: text }
+          - { name: lead_en, label: 'Párrafo (EN)', type: text }
+          - { name: email, label: 'Correo que recibe los mensajes', type: string }
+          - { name: email_subject_es, label: 'Asunto del correo (ES)', type: string }
+          - { name: email_subject_en, label: 'Asunto del correo (EN)', type: string }
+          - { name: button_1_es, label: 'Botón del correo (ES)', type: string }
+          - { name: button_1_en, label: 'Botón del correo (EN)', type: string }
+          - { name: button_2_es, label: 'Segundo botón (ES)', type: string }
+          - { name: button_2_en, label: 'Segundo botón (EN)', type: string }
+          - { name: button_2_url, label: 'Segundo botón, enlace', type: string }
+
+  - name: artists-group
+    label: Artistas
+    type: group
+    items:
+
+      - name: artists
+        label: Artistas (carrusel y páginas)
+        type: file
+        path: content/artists/artists.json
+        format: json
+        fields:
+          - name: items
+            label: Artistas
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{name}"
+            fields:
+              - { name: name, label: 'Nombre', type: string, required: true }
+              - { name: slug, label: 'Dirección de su página', type: string, pattern: "^[a-z0-9-]*$", description: "Solo minúsculas, números y guiones (ej. raisa-diaz). Si lo dejas vacío se crea con el nombre." }
+              - { name: tag_es, label: 'Género (ES)', type: string }
+              - { name: tag_en, label: 'Género (EN)', type: string }
+              - { name: photo, label: 'Foto de la tarjeta', type: image, options: { media: images }, description: 'Vertical. Se usa en el carrusel y, si no hay portada, en su página.' }
+              - { name: cover, label: 'Portada de su página (opcional)', type: image, options: { media: images } }
+              - { name: release, label: 'Último lanzamiento', type: string }
+              - { name: label, label: 'Sello', type: string }
+              - { name: bio_es, label: 'Biografía (ES)', type: text, description: "*Entre asteriscos* va resaltado." }
+              - { name: bio_en, label: 'Biografía (EN)', type: text }
+              - { name: note_es, label: 'Nota escrita a mano debajo de la bio (ES)', type: string, description: 'Déjala vacía para ocultarla.' }
+              - { name: note_en, label: 'Nota escrita a mano debajo de la bio (EN)', type: string }
+              - { name: gallery, label: 'Galería de fotos', type: image, options: { media: images, multiple: { max: 8 } }, description: "Se ven en cuadros de 2 en 2; mejor en cantidad par." }
+              - { name: listen_url, label: 'Botón "Escuchar", enlace', type: string, description: 'Su perfil de Spotify, YouTube, etc.' }
+              - { name: booking_handle, label: 'Booking, usuario', type: string, description: "Ejemplo: @onemusicglobal" }
+              - { name: booking_url, label: 'Botón "Booking", enlace', type: string }
+
+      - name: artist-page
+        label: Textos de la página de artista
+        type: file
+        path: content/artists/page.json
+        format: json
+        fields:
+          - { name: seo_description_es, label: 'Descripción para Google (ES)', type: string }
+          - { name: seo_description_en, label: 'Descripción para Google (EN)', type: string }
+          - { name: all_roster_es, label: 'Botón superior (ES)', type: string }
+          - { name: all_roster_en, label: 'Botón superior (EN)', type: string }
+          - { name: back_es, label: 'Enlace "Volver" (ES)', type: string }
+          - { name: back_en, label: 'Enlace "Volver" (EN)', type: string }
+          - { name: listen_es, label: 'Botón "Escuchar" (ES)', type: string }
+          - { name: listen_en, label: 'Botón "Escuchar" (EN)', type: string }
+          - { name: booking_es, label: 'Botón "Booking" (ES)', type: string }
+          - { name: booking_en, label: 'Botón "Booking" (EN)', type: string }
+          - { name: genre_es, label: 'Dato "Género" (ES)', type: string }
+          - { name: genre_en, label: 'Dato "Género" (EN)', type: string }
+          - { name: label_es, label: 'Dato "Sello" (ES)', type: string }
+          - { name: label_en, label: 'Dato "Sello" (EN)', type: string }
+          - { name: latest_es, label: 'Dato "Último lanzamiento" (ES)', type: string }
+          - { name: latest_en, label: 'Dato "Último lanzamiento" (EN)', type: string }
+          - { name: next_es, label: 'Texto "Siguiente artista" (ES)', type: string }
+          - { name: next_en, label: 'Texto "Siguiente artista" (EN)', type: string }
+
+  - name: general
+    label: General
+    type: group
+    items:
+
+      - name: links
+        label: Enlaces y redes
+        type: file
+        path: content/site/links.json
+        format: json
+        fields:
+          - name: social
+            label: Redes sociales (menú y pie de página)
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{label}"
+            fields:
+              - { name: label, label: 'Nombre', type: string }
+              - { name: url, label: 'Enlace', type: string }
+          - { name: publishing_url, label: 'Página de One Music Publishing', type: string, description: 'Se usa en el botón de arriba, el menú y la tarjeta Publishing.' }
+          - { name: publishing_label, label: 'Nombre de Publishing en el menú', type: string }
+          - { name: publishing_button_es, label: 'Botón superior de Publishing (ES)', type: string }
+          - { name: publishing_button_en, label: 'Botón superior de Publishing (EN)', type: string }
+          - name: family
+            label: Familia One (pie de página)
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{label}"
+            fields:
+              - { name: label, label: 'Nombre', type: string }
+              - { name: url, label: 'Enlace', type: string }
+
+      - name: settings
+        label: Menú, pie de página y Google
+        type: file
+        path: content/site/settings.json
+        format: json
+        fields:
+          - { name: seo_title_es, label: 'Título en Google y en la pestaña (ES)', type: string }
+          - { name: seo_title_en, label: 'Título en Google y en la pestaña (EN)', type: string }
+          - { name: seo_description_es, label: 'Descripción en Google (ES)', type: text }
+          - { name: seo_description_en, label: 'Descripción en Google (EN)', type: text }
+          - { name: nav_artists_es, label: 'Menú, Artistas (ES)', type: string }
+          - { name: nav_artists_en, label: 'Menú, Artistas (EN)', type: string }
+          - { name: nav_releases_es, label: 'Menú, Lanzamientos (ES)', type: string }
+          - { name: nav_releases_en, label: 'Menú, Lanzamientos (EN)', type: string }
+          - { name: nav_services_es, label: 'Menú, Servicios (ES)', type: string }
+          - { name: nav_services_en, label: 'Menú, Servicios (EN)', type: string }
+          - { name: nav_mb_es, label: 'Menú, Music Business (ES)', type: string }
+          - { name: nav_mb_en, label: 'Menú, Music Business (EN)', type: string }
+          - { name: nav_playlist_es, label: 'Menú, Playlist (ES)', type: string }
+          - { name: nav_playlist_en, label: 'Menú, Playlist (EN)', type: string }
+          - { name: nav_contact_es, label: 'Menú, Contacto (ES)', type: string }
+          - { name: nav_contact_en, label: 'Menú, Contacto (EN)', type: string }
+          - { name: loader_1_es, label: 'Pantalla de carga, frase 1 (ES)', type: string }
+          - { name: loader_1_en, label: 'Pantalla de carga, frase 1 (EN)', type: string }
+          - { name: loader_2_es, label: 'Pantalla de carga, frase 2 (ES)', type: string }
+          - { name: loader_2_en, label: 'Pantalla de carga, frase 2 (EN)', type: string }
+          - { name: loader_3_es, label: 'Pantalla de carga, frase 3 (ES)', type: string }
+          - { name: loader_3_en, label: 'Pantalla de carga, frase 3 (EN)', type: string }
+          - { name: loader_4_es, label: 'Pantalla de carga, frase 4 (ES)', type: string }
+          - { name: loader_4_en, label: 'Pantalla de carga, frase 4 (EN)', type: string }
+          - { name: news_title_es, label: 'Newsletter, título (ES)', type: string }
+          - { name: news_title_en, label: 'Newsletter, título (EN)', type: string }
+          - { name: news_text_es, label: 'Newsletter, texto (ES)', type: text }
+          - { name: news_text_en, label: 'Newsletter, texto (EN)', type: text }
+          - { name: news_placeholder_es, label: 'Newsletter, ejemplo de correo (ES)', type: string }
+          - { name: news_placeholder_en, label: 'Newsletter, ejemplo de correo (EN)', type: string }
+          - { name: news_button_es, label: 'Newsletter, botón (ES)', type: string }
+          - { name: news_button_en, label: 'Newsletter, botón (EN)', type: string }
+          - { name: news_done_es, label: 'Newsletter, mensaje al enviar (ES)', type: string }
+          - { name: news_done_en, label: 'Newsletter, mensaje al enviar (EN)', type: string }
+          - { name: footer_explore_es, label: 'Pie, título "Explora" (ES)', type: string }
+          - { name: footer_explore_en, label: 'Pie, título "Explora" (EN)', type: string }
+          - { name: footer_follow_es, label: 'Pie, título "Síguenos" (ES)', type: string }
+          - { name: footer_follow_en, label: 'Pie, título "Síguenos" (EN)', type: string }
+          - { name: footer_family_es, label: 'Pie, título "Familia One" (ES)', type: string }
+          - { name: footer_family_en, label: 'Pie, título "Familia One" (EN)', type: string }
+          - { name: footer_rights_es, label: 'Pie, derechos (ES)', type: string }
+          - { name: footer_rights_en, label: 'Pie, derechos (EN)', type: string }
+          - { name: footer_tagline_es, label: 'Pie, frase final (ES)', type: string }
+          - { name: footer_tagline_en, label: 'Pie, frase final (EN)', type: string }

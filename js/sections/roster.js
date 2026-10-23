@@ -2,25 +2,30 @@ OMG.register('roster', {
   render: function () {
     var track = OMG.$('.roster__track');
     if (!track) return;
-    var esc = OMG.esc, arrow = OMG.icons.arrow;
-    var html = (OMG.data.artists || []).map(function (a, i) {
+    var esc = OMG.esc, arrow = OMG.icons.arrow, c = OMG.c;
+    var more = esc(c('roster.card_more'));
+    var html = OMG.list('artists.items').filter(function (a) { return a.name; }).map(function (a, i) {
       return '' +
-        '<a class="artist" href="artista.html?a=' + encodeURIComponent(a.slug) + '" data-transition data-cursor="' + esc(OMG.t('cursor.view', 'VER')) + '">' +
-        '<div class="artist__img"><img src="' + esc(a.img) + '" alt="' + esc(a.name) + '" loading="lazy" decoding="async"></div>' +
+        '<a class="artist" href="artista.html?a=' + encodeURIComponent(a.slug || OMG.slug(a.name)) + '" data-transition data-cursor="' + esc(OMG.t('cursor.view', 'VER')) + '">' +
+        '<div class="artist__img"><img src="' + esc(OMG.media(a.photo)) + '" alt="' + esc(a.name) + '" loading="lazy" decoding="async"></div>' +
         '<span class="artist__num">' + String(i + 1).padStart(2, '0') + '</span>' +
-        '<span class="artist__tag">' + esc(OMG.tr(a.tag)) + '</span>' +
+        '<span class="artist__tag">' + esc(OMG.pick(a, 'tag')) + '</span>' +
         '<div class="artist__body"><h3 class="artist__name">' + esc(a.name) + '</h3>' +
-        '<span class="artist__more">' + esc(OMG.t('roster.more', 'Ver artista')) + ' ' + arrow + '</span></div>' +
+        '<span class="artist__more">' + more + ' ' + arrow + '</span></div>' +
         '<span class="artist__glare"></span>' +
         '</a>';
     }).join('');
     html += '' +
       '<div class="artist artist--cta">' +
-      '<span class="eyebrow">' + esc(OMG.t('roster.ctaEyebrow', '¿Eres el próximo?')) + '</span>' +
-      '<h3>' + OMG.t('roster.ctaTitle', 'Tu nombre<br>podría estar<br>aquí') + '</h3>' +
-      '<a class="btn" href="#contacto">' + esc(OMG.t('roster.ctaBtn', 'Escríbenos')) + ' <span class="btn__icon">' + arrow + arrow + '</span></a>' +
+      '<span class="eyebrow">' + esc(c('roster.cta_eyebrow')) + '</span>' +
+      '<h3>' + OMG.fmt(c('roster.cta_title')) + '</h3>' +
+      '<a class="btn" href="#contacto">' + esc(c('roster.cta_button')) + ' <span class="btn__icon">' + arrow + arrow + '</span></a>' +
       '</div>';
     track.innerHTML = html;
+
+    var ghost = OMG.$('.roster__ghost');
+    var word = c('roster.ghost');
+    if (ghost && word) ghost.textContent = [word, word, word].join(' ✦ ');
   },
 
   init: function (ctx) {

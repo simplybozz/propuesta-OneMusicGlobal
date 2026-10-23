@@ -1,11 +1,12 @@
-(function () {
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+OMG.ready.then(function () {
   'use strict';
 
   var $ = OMG.$, $$ = OMG.$$;
   var body = document.body;
   var sections = OMG.sections;
 
-  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   window.scrollTo(0, 0);
 
   sections.forEach(function (s) { if (s.render) s.render(); });
@@ -269,4 +270,4 @@
     });
     return update;
   }
-})();
+});

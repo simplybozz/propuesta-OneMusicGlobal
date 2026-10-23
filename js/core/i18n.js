@@ -3,8 +3,39 @@
 
   var KEY = 'omg-lang';
   var LANGS = ['es', 'en'];
-  var dict = OMG.data.i18n || {};
-  var root = document.documentElement;
+
+  var UI = {
+    en: {
+      'a11y.home': 'One Music Global — home',
+      'a11y.mainNav': 'Main',
+      'a11y.lang': 'Language',
+      'a11y.hero': 'Home',
+      'a11y.artists': 'Artists',
+      'a11y.stats': 'Numbers',
+      'a11y.houses': 'Global and Publishing',
+      'a11y.email': 'Email',
+      'cursor.view': 'VIEW',
+      'cursor.here': 'HERE',
+      'cursor.go': 'GO',
+      'cursor.up': 'UP',
+      'cursor.next': 'NEXT',
+      'cursor.soon': 'SOON',
+      'menu.label': 'Menu',
+      'menu.closeLabel': 'Close',
+      'menu.open': 'Open menu',
+      'menu.close': 'Close menu',
+      'hero.play': "Listen to One's Playlist",
+      'releases.soon': 'Coming soon',
+      'releases.listen': 'Listen to {title} by {artist}',
+      'releases.cover': 'Cover of {title}',
+      'playlist.frame': "One's Playlist on Spotify",
+      'toTop': 'Back to top',
+      'player.label': 'Player',
+      'player.play': 'Play',
+      'player.pause': 'Pause',
+      'player.close': 'Close player'
+    }
+  };
 
   function read() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
   function save(l) { try { localStorage.setItem(KEY, l); return true; } catch (e) { return false; } }
@@ -12,10 +43,7 @@
   var param = new URLSearchParams(location.search).get('lang');
   var lang = LANGS.indexOf(param) > -1 ? param : (read() === 'en' ? 'en' : 'es');
   if (param) save(lang);
-
-  var pack = dict[lang] || null;
-  var ui = (pack && pack.ui) || {};
-  var content = (pack && pack.content) || {};
+  var ui = UI[lang] || {};
 
   function t(key, fallback, vars) {
     var s = ui[key] != null ? ui[key] : fallback;
@@ -23,27 +51,18 @@
     return s;
   }
 
-  function tr(text) {
-    if (!pack || text == null) return text;
-    if (content[text] != null) return content[text];
-    return String(text).split(' · ').map(function (p) { return content[p] != null ? content[p] : p; }).join(' · ');
-  }
-
-  if (pack) {
-    OMG.$$('[data-i18n]').forEach(function (el) {
-      var v = ui[el.dataset.i18n];
-      if (v != null) el.innerHTML = v;
+  OMG.$$('[data-i18n]').forEach(function (el) {
+    var v = ui[el.dataset.i18n];
+    if (v != null) el.textContent = v;
+  });
+  OMG.$$('[data-i18n-attr]').forEach(function (el) {
+    el.dataset.i18nAttr.split(';').forEach(function (pair) {
+      var p = pair.split(':');
+      var v = ui[(p[1] || '').trim()];
+      if (v != null) el.setAttribute(p[0].trim(), v);
     });
-    OMG.$$('[data-i18n-attr]').forEach(function (el) {
-      el.dataset.i18nAttr.split(';').forEach(function (pair) {
-        var p = pair.split(':');
-        var v = ui[(p[1] || '').trim()];
-        if (v != null) el.setAttribute(p[0].trim(), v);
-      });
-    });
-  }
-  root.lang = lang;
-  root.classList.remove('i18n-wait');
+  });
+  document.documentElement.lang = lang;
 
   function mark(l) {
     OMG.$$('.lang').forEach(function (sw) {
@@ -71,5 +90,4 @@
 
   OMG.lang = lang;
   OMG.t = t;
-  OMG.tr = tr;
 })();

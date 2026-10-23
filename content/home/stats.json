@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "value": 15,
+      "suffix": "+",
+      "label_es": "años de experiencia en la industria musical",
+      "label_en": "years of experience in the music industry"
+    },
+    {
+      "value": 25,
+      "suffix": "K",
+      "label_es": "personas en nuestra comunidad global",
+      "label_en": "people in our global community"
+    },
+    {
+      "value": 4,
+      "suffix": "",
+      "label_es": "ediciones de Music Business",
+      "label_en": "editions of Music Business"
+    },
+    {
+      "value": 20,
+      "suffix": "+",
+      "label_es": "compositores representados en Publishing",
+      "label_en": "songwriters represented in Publishing"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "eyebrow_es": "Sello boutique · Música cristiana latina",
+  "eyebrow_en": "Boutique label · Latin Christian music",
+  "line1_es": "Música que",
+  "line1_en": "Music that",
+  "highlight_es": "Mueve",
+  "highlight_en": "Moves",
+  "note_es": "¡y transforma!",
+  "note_en": "and transforms!",
+  "line3_es": "al mundo.",
+  "line3_en": "the world.",
+  "lead_es": "Representamos a los artistas y sellos más importantes de la música cristiana latina. Desarrollo, distribución, marketing y contenido para que tu mensaje llegue más lejos.",
+  "lead_en": "We represent the leading artists and labels in Latin Christian music. Development, distribution, marketing and content to take your message further.",
+  "button_1_es": "Conoce el roster",
+  "button_1_en": "Meet the roster",
+  "button_2_es": "Envía tu música",
+  "button_2_en": "Send your music",
+  "scroll_es": "Desliza",
+  "scroll_en": "Scroll",
+  "badge_es": "One Music Global ✦ Música con propósito ✦ ",
+  "badge_en": "One Music Global ✦ Music with purpose ✦ ",
+  "photo_1": {
+    "image": "/assets/img/p3.jpg",
+    "caption_es": "en vivo ✦",
+    "caption_en": "live ✦"
+  },
+  "photo_2": {
+    "image": "/assets/img/p8.jpg",
+    "caption_es": "adoración sin fronteras",
+    "caption_en": "worship without borders"
+  },
+  "photo_3": {
+    "image": "/assets/img/p14.jpg",
+    "caption_es": "studio days",
+    "caption_en": "studio days"
+  }
+}

@@ -1,0 +1,188 @@
+{
+  "items": [
+    {
+      "name": "Raisa Díaz",
+      "slug": "raisa-diaz",
+      "tag_es": "Worship",
+      "tag_en": "Worship",
+      "photo": "/assets/img/p3.jpg",
+      "cover": "",
+      "release": "—",
+      "label": "One Music Global",
+      "bio_es": "Este perfil es una plantilla de la propuesta. Aquí va la biografía oficial: la historia del artista, su mensaje y los momentos que marcaron su carrera.",
+      "bio_en": "This profile is a template for the proposal. The official biography goes here: the artist's story, their message and the moments that shaped their career.",
+      "note_es": "✦ texto de muestra, se reemplaza con la bio real",
+      "note_en": "✦ sample text, to be replaced with the real bio",
+      "gallery": [
+        "/assets/img/p8.jpg",
+        "/assets/img/p6.jpg",
+        "/assets/img/p18.jpg",
+        "/assets/img/p1.jpg"
+      ],
+      "listen_url": "https://open.spotify.com/playlist/2KwyAltnq7obNVKRtvARpS",
+      "booking_handle": "@onemusicglobal",
+      "booking_url": "https://www.instagram.com/onemusicglobal/"
+    },
+    {
+      "name": "Grupo Grace",
+      "slug": "grupo-grace",
+      "tag_es": "Dúo",
+      "tag_en": "Duo",
+      "photo": "/assets/img/p13.jpg",
+      "cover": "",
+      "release": "Suena El Arpa",
+      "label": "One Music Global",
+      "bio_es": "Este perfil es una plantilla de la propuesta. Aquí va la biografía oficial: la historia del artista, su mensaje y los momentos que marcaron su carrera.",
+      "bio_en": "This profile is a template for the proposal. The official biography goes here: the artist's story, their message and the moments that shaped their career.",
+      "note_es": "✦ texto de muestra, se reemplaza con la bio real",
+      "note_en": "✦ sample text, to be replaced with the real bio",
+      "gallery": [
+        "/assets/img/p6.jpg",
+        "/assets/img/p18.jpg",
+        "/assets/img/p1.jpg",
+        "/assets/img/p14.jpg"
+      ],
+      "listen_url": "https://open.spotify.com/playlist/2KwyAltnq7obNVKRtvARpS",
+      "booking_handle": "@onemusicglobal",
+      "booking_url": "https://www.instagram.com/onemusicglobal/"
+    },
+    {
+      "name": "Obyone",
+      "slug": "obyone",
+      "tag_es": "Urbano",
+      "tag_en": "Urban",
+      "photo": "/assets/img/p16.jpg",
+      "cover": "",
+      "release": "—",
+      "label": "One Music Global",
+      "bio_es": "Este perfil es una plantilla de la propuesta. Aquí va la biografía oficial: la historia del artista, su mensaje y los momentos que marcaron su carrera.",
+      "bio_en": "This profile is a template for the proposal. The official biography goes here: the artist's story, their message and the moments that shaped their career.",
+      "note_es": "✦ texto de muestra, se reemplaza con la bio real",
+      "note_en": "✦ sample text, to be replaced with the real bio",
+      "gallery": [
+        "/assets/img/p18.jpg",
+        "/assets/img/p1.jpg",
+        "/assets/img/p14.jpg",
+        "/assets/img/p11.jpg"
+      ],
+      "listen_url": "https://open.spotify.com/playlist/2KwyAltnq7obNVKRtvARpS",
+      "booking_handle": "@onemusicglobal",
+      "booking_url": "https://www.instagram.com/onemusicglobal/"
+    },
+    {
+      "name": "Marcos Yaroide",
+      "slug": "marcos-yaroide",
+      "tag_es": "Worship",
+      "tag_en": "Worship",
+      "photo": "/assets/img/p14.jpg",
+      "cover": "",
+      "release": "—",
+      "label": "One Music Global",
+      "bio_es": "Este perfil es una plantilla de la propuesta. Aquí va la biografía oficial: la historia del artista, su mensaje y los momentos que marcaron su carrera.",
+      "bio_en": "This profile is a template for the proposal. The official biography goes here: the artist's story, their message and the moments that shaped their career.",
+      "note_es": "✦ texto de muestra, se reemplaza con la bio real",
+      "note_en": "✦ sample text, to be replaced with the real bio",
+      "gallery": [
+        "/assets/img/p1.jpg",
+        "/assets/img/p14.jpg",
+        "/assets/img/p11.jpg",
+        "/assets/img/p8.jpg"
+      ],
+      "listen_url": "https://open.spotify.com/playlist/2KwyAltnq7obNVKRtvARpS",
+      "booking_handle": "@onemusicglobal",
+      "booking_url": "https://www.instagram.com/onemusicglobal/"
+    },
+    {
+      "name": "René González",
+      "slug": "rene-gonzalez",
+      "tag_es": "Cantautor",
+      "tag_en": "Singer-songwriter",
+      "photo": "/assets/img/p5.jpg",
+      "cover": "",
+      "release": "—",
+      "label": "One Music Global",
+      "bio_es": "Este perfil es una plantilla de la propuesta. Aquí va la biografía oficial: la historia del artista, su mensaje y los momentos que marcaron su carrera.",
+      "bio_en": "This profile is a template for the proposal. The official biography goes here: the artist's story, their message and the moments that shaped their career.",
+      "note_es": "✦ texto de muestra, se reemplaza con la bio real",
+      "note_en": "✦ sample text, to be replaced with the real bio",
+      "gallery": [
+        "/assets/img/p14.jpg",
+        "/assets/img/p11.jpg",
+        "/assets/img/p8.jpg",
+        "/assets/img/p6.jpg"
+      ],
+      "listen_url": "https://open.spotify.com/playlist/2KwyAltnq7obNVKRtvARpS",
+      "booking_handle": "@onemusicglobal",
+      "booking_url": "https://www.instagram.com/onemusicglobal/"
+    },
+    {
+      "name": "José Luis Reyes",
+      "slug": "jose-luis-reyes",
+      "tag_es": "Balada",
+      "tag_en": "Ballad",
+      "photo": "/assets/img/p12.jpg",
+      "cover": "",
+      "release": "—",
+      "label": "One Music Global",
+      "bio_es": "Este perfil es una plantilla de la propuesta. Aquí va la biografía oficial: la historia del artista, su mensaje y los momentos que marcaron su carrera.",
+      "bio_en": "This profile is a template for the proposal. The official biography goes here: the artist's story, their message and the moments that shaped their career.",
+      "note_es": "✦ texto de muestra, se reemplaza con la bio real",
+      "note_en": "✦ sample text, to be replaced with the real bio",
+      "gallery": [
+        "/assets/img/p11.jpg",
+        "/assets/img/p8.jpg",
+        "/assets/img/p6.jpg",
+        "/assets/img/p18.jpg"
+      ],
+      "listen_url": "https://open.spotify.com/playlist/2KwyAltnq7obNVKRtvARpS",
+      "booking_handle": "@onemusicglobal",
+      "booking_url": "https://www.instagram.com/onemusicglobal/"
+    },
+    {
+      "name": "Railiz Jaichell",
+      "slug": "railiz-jaichell",
+      "tag_es": "Artista",
+      "tag_en": "Artist",
+      "photo": "/assets/img/p11.jpg",
+      "cover": "",
+      "release": "—",
+      "label": "One Music Global",
+      "bio_es": "Este perfil es una plantilla de la propuesta. Aquí va la biografía oficial: la historia del artista, su mensaje y los momentos que marcaron su carrera.",
+      "bio_en": "This profile is a template for the proposal. The official biography goes here: the artist's story, their message and the moments that shaped their career.",
+      "note_es": "✦ texto de muestra, se reemplaza con la bio real",
+      "note_en": "✦ sample text, to be replaced with the real bio",
+      "gallery": [
+        "/assets/img/p8.jpg",
+        "/assets/img/p6.jpg",
+        "/assets/img/p18.jpg",
+        "/assets/img/p1.jpg"
+      ],
+      "listen_url": "https://open.spotify.com/playlist/2KwyAltnq7obNVKRtvARpS",
+      "booking_handle": "@onemusicglobal",
+      "booking_url": "https://www.instagram.com/onemusicglobal/"
+    },
+    {
+      "name": "Joan Bonilla",
+      "slug": "joan-bonilla",
+      "tag_es": "Artista",
+      "tag_en": "Artist",
+      "photo": "/assets/img/p19.jpg",
+      "cover": "",
+      "release": "—",
+      "label": "One Music Global",
+      "bio_es": "Este perfil es una plantilla de la propuesta. Aquí va la biografía oficial: la historia del artista, su mensaje y los momentos que marcaron su carrera.",
+      "bio_en": "This profile is a template for the proposal. The official biography goes here: the artist's story, their message and the moments that shaped their career.",
+      "note_es": "✦ texto de muestra, se reemplaza con la bio real",
+      "note_en": "✦ sample text, to be replaced with the real bio",
+      "gallery": [
+        "/assets/img/p6.jpg",
+        "/assets/img/p18.jpg",
+        "/assets/img/p1.jpg",
+        "/assets/img/p14.jpg"
+      ],
+      "listen_url": "https://open.spotify.com/playlist/2KwyAltnq7obNVKRtvARpS",
+      "booking_handle": "@onemusicglobal",
+      "booking_url": "https://www.instagram.com/onemusicglobal/"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "kicker_es": "El ecosistema",
+  "kicker_en": "The ecosystem",
+  "title_es": "Un solo One.\n*Dos casas.*",
+  "title_en": "Just one One.\n*Two houses.*",
+  "lead_es": "Global trabaja con los artistas y sellos. Publishing protege y administra el trabajo de los compositores. Juntos cubrimos toda la vida de una canción.",
+  "lead_en": "Global works with artists and labels. Publishing protects and manages the work of songwriters. Together we cover the whole life of a song.",
+  "global": {
+    "image": "/assets/img/p4.jpg",
+    "badge_es": "Estás aquí",
+    "badge_en": "You are here",
+    "title": "Global",
+    "text_es": "Artistas, sellos, lanzamientos, contenido y eventos. La parte de la música que se ve, se escucha y se vive en el escenario.",
+    "text_en": "Artists, labels, releases, content and events. The side of music you see, hear and live on stage.",
+    "link_es": "Ver artistas",
+    "link_en": "View artists"
+  },
+  "publishing": {
+    "image": "/assets/img/p10.jpg",
+    "badge_es": "Publishing",
+    "badge_en": "Publishing",
+    "title": "Publishing",
+    "text_es": "Administración de publishing, gestión de compositores y recaudación de regalías. Tu catálogo, organizado y protegido.",
+    "text_en": "Publishing administration, songwriter management and royalty collection. Your catalog, organized and protected.",
+    "link_es": "Visitar Publishing",
+    "link_en": "Visit Publishing"
+  }
+}

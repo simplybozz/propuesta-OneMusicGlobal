@@ -1,0 +1,70 @@
+{
+  "kicker_es": "Qué hacemos",
+  "kicker_en": "What we do",
+  "title_es": "Todo lo que tu\nmúsica necesita",
+  "title_en": "Everything your\nmusic needs",
+  "lead_es": "Un equipo boutique: pocos artistas, atención total. Acompañamos cada etapa del camino, desde la idea hasta las playlists editoriales.",
+  "lead_en": "A boutique team: few artists, full attention. We walk with you through every stage, from the first idea to editorial playlists.",
+  "items": [
+    {
+      "title_es": "Desarrollo de artistas",
+      "title_en": "Artist development",
+      "text_es": "Dirección artística, imagen y planificación de carrera. Construimos proyectos sólidos que se sostienen en el tiempo.",
+      "text_en": "Artistic direction, image and career planning. We build solid projects that stand the test of time.",
+      "tags_es": "Dirección artística, Imagen, Plan de carrera",
+      "tags_en": "Artistic direction, Image, Career plan",
+      "image": "/assets/img/p18.jpg",
+      "alt_es": "Banda en escenario iluminado",
+      "alt_en": "Band on a lit stage",
+      "color": "yellow"
+    },
+    {
+      "title_es": "Distribución digital",
+      "title_en": "Digital distribution",
+      "text_es": "Tu música en todas las plataformas, con una cadena de distribución de audio y video transparente y eficiente.",
+      "text_en": "Your music on every platform, with a transparent and efficient audio and video distribution chain.",
+      "tags_es": "Spotify, Apple Music, YouTube, Amazon Music",
+      "tags_en": "Spotify, Apple Music, YouTube, Amazon Music",
+      "image": "/assets/img/p17.jpg",
+      "alt_es": "Colección de vinilos y audífonos",
+      "alt_en": "Vinyl collection and headphones",
+      "color": "blue"
+    },
+    {
+      "title_es": "Marketing & playlisting",
+      "title_en": "Marketing & playlisting",
+      "text_es": "Lanzamientos con estrategia: pitch editorial, campañas en redes y presencia en playlists que conectan con tu audiencia.",
+      "text_en": "Releases with a strategy: editorial pitching, social campaigns and playlist placement that connects with your audience.",
+      "tags_es": "Pitch editorial, Campañas, Redes sociales",
+      "tags_en": "Editorial pitch, Campaigns, Social media",
+      "image": "/assets/img/p4.jpg",
+      "alt_es": "Público en concierto con luces de colores",
+      "alt_en": "Concert crowd under colored lights",
+      "color": "teal"
+    },
+    {
+      "title_es": "Contenido *original*",
+      "title_en": "*Original* content",
+      "text_es": "Formatos propios como *One Spotlight* y *Behind the Song*, que cuentan la historia detrás de cada canción.",
+      "text_en": "Our own formats like *One Spotlight* and *Behind the Song*, telling the story behind every song.",
+      "tags_es": "One Spotlight, Behind the Song, Video",
+      "tags_en": "One Spotlight, Behind the Song, Video",
+      "image": "/assets/img/p7.jpg",
+      "alt_es": "Letrero de neón con una nota musical",
+      "alt_en": "Neon sign with a musical note",
+      "color": "ink"
+    },
+    {
+      "title_es": "Educación musical",
+      "title_en": "Music education",
+      "text_es": "Con *Music Business* formamos a músicos, compositores y equipos en el negocio de la música.",
+      "text_en": "With *Music Business* we train musicians, songwriters and teams in the business of music.",
+      "tags_es": "Conferencias, Talleres, Comunidad",
+      "tags_en": "Conferences, Workshops, Community",
+      "image": "/assets/img/p12.jpg",
+      "alt_es": "Escenario con público levantando las manos",
+      "alt_en": "Stage with the crowd raising their hands",
+      "color": "white"
+    }
+  ]
+}

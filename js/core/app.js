@@ -61,10 +61,33 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(fn);
   }
 
+  function slug(s) {
+    return String(s || '').normalize('NFD').replace(/[^\w\s-]/g, '')
+      .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  }
+
+  function fitScopes() {
+    $$('[data-fit-em]').forEach(function (ref) {
+      var scope = ref.closest('[data-fit-scope]');
+      if (!scope) return;
+      var keep = $$('[data-fit-keep]', scope);
+      scope.style.fontSize = '';
+      keep.forEach(function (k) { k.style.fontSize = ''; });
+      var base = parseFloat(getComputedStyle(scope).fontSize);
+      var w = ref.scrollWidth;
+      if (!base || !w) return;
+      var room = scope.parentElement.clientWidth * 0.92;
+      var scale = Math.min(base * Number(ref.dataset.fitEm), room) / w;
+      scope.style.fontSize = (base * scale).toFixed(2) + 'px';
+      keep.forEach(function (k) { k.style.fontSize = (Number(k.dataset.fitKeep) / scale).toFixed(4) + 'em'; });
+    });
+  }
+
   function fitLines() {
     var items = $$('[data-fit-to]');
-    if (!items.length) return;
+    if (!items.length && !$('[data-fit-em]')) return;
     var fit = function () {
+      fitScopes();
       items.forEach(function (el) {
         var ref = $(el.dataset.fitTo);
         if (!ref) return;
@@ -85,8 +108,8 @@
     $: $,
     $$: $$,
     esc: esc,
+    slug: slug,
     icons: icons,
-    data: window.OMG_DATA || {},
     page: document.body.dataset.page,
     splitWords: splitWords,
     splitChars: splitChars,

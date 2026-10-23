@@ -2,19 +2,19 @@ OMG.register('services', {
   render: function () {
     var box = OMG.$('[data-render="services"]');
     if (!box) return;
-    var esc = OMG.esc;
-    var list = OMG.data.services || [];
+    var esc = OMG.esc, pick = OMG.pick;
+    var list = OMG.list('services.items').filter(function (s) { return pick(s, 'title'); });
     var total = String(list.length).padStart(2, '0');
     box.innerHTML = list.map(function (s, i) {
-      var title = esc(OMG.tr(s.title)) + (s.highlight ? ' <span class="hl">' + esc(OMG.tr(s.highlight)) + '</span>' : '');
+      var tags = String(pick(s, 'tags') || '').split(',').map(function (t) { return t.trim(); }).filter(Boolean);
       return '' +
         '<article class="svc svc--' + esc(s.color || 'blue') + '" style="--i:' + i + '">' +
         '<div class="svc__top">' +
         '<span class="svc__num">' + String(i + 1).padStart(2, '0') + ' / ' + total + '</span>' +
-        '<div><h3 class="display">' + title + '</h3><p>' + OMG.tr(s.text) + '</p></div>' +
-        '<div class="svc__chips">' + (s.chips || []).map(function (c) { return '<span>' + esc(OMG.tr(c)) + '</span>'; }).join('') + '</div>' +
+        '<div><h3 class="display">' + OMG.fmt(pick(s, 'title')) + '</h3><p>' + OMG.fmt(pick(s, 'text'), 'strong') + '</p></div>' +
+        '<div class="svc__chips">' + tags.map(function (t) { return '<span>' + esc(t) + '</span>'; }).join('') + '</div>' +
         '</div>' +
-        '<div class="svc__media"><img src="' + esc(s.img) + '" alt="' + esc(OMG.tr(s.alt || '')) + '" loading="lazy" decoding="async"></div>' +
+        '<div class="svc__media"><img src="' + esc(OMG.media(s.image)) + '" alt="' + esc(pick(s, 'alt')) + '" loading="lazy" decoding="async"></div>' +
         '</article>';
     }).join('');
   },

@@ -1,0 +1,34 @@
+{
+  "social": [
+    {
+      "label": "Instagram",
+      "url": "https://www.instagram.com/onemusicglobal/"
+    },
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/@onemusicglobaloficial"
+    },
+    {
+      "label": "Spotify",
+      "url": "https://open.spotify.com/playlist/2KwyAltnq7obNVKRtvARpS"
+    }
+  ],
+  "publishing_label": "One Music Publishing",
+  "publishing_button_es": "Publishing",
+  "publishing_button_en": "Publishing",
+  "publishing_url": "https://www.onemusicglobal.com",
+  "family": [
+    {
+      "label": "One Music Publishing",
+      "url": "https://www.onemusicglobal.com"
+    },
+    {
+      "label": "@onemusicpublishing",
+      "url": "https://www.instagram.com/onemusicpublishing/"
+    },
+    {
+      "label": "@musicbusiness100",
+      "url": "https://www.instagram.com/musicbusiness100/"
+    }
+  ]
+}

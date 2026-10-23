@@ -1,0 +1,60 @@
+{
+  "kicker_es": "Lo más nuevo",
+  "kicker_en": "The latest",
+  "title_es": "Lanzamientos",
+  "title_en": "Releases",
+  "sticker_es": "NUEVA\nMÚSICA",
+  "sticker_en": "NEW\nMUSIC",
+  "lead_es": "Toca un disco para escuchar un adelanto en el reproductor.",
+  "lead_en": "Tap a record to hear a preview in the player.",
+  "items": [
+    {
+      "title": "Arquitecto",
+      "artist": "Naomi Almonte Music",
+      "type_es": "Single · 2025",
+      "type_en": "Single · 2025",
+      "cover": "/assets/img/releases/arquitecto.jpg",
+      "audio": "/assets/audio/arquitecto.mp3",
+      "audio_url": "",
+      "spotify": "https://open.spotify.com/track/2EoR2N5XhU7HRJUjvxkzW2",
+      "color": "yellow",
+      "soon": false
+    },
+    {
+      "title": "Rompan El Techo",
+      "artist": "Génesis Colón",
+      "type_es": "En vivo · 2024",
+      "type_en": "Live · 2024",
+      "cover": "/assets/img/releases/rompan-el-techo-en-vivo.jpg",
+      "audio": "/assets/audio/rompan-el-techo-en-vivo.mp3",
+      "audio_url": "",
+      "spotify": "https://open.spotify.com/track/7dooEx4uwQ7Z2eZoMdmtZT",
+      "color": "teal",
+      "soon": false
+    },
+    {
+      "title": "Unción en el aire",
+      "artist": "World Worship, Cales Louima",
+      "type_es": "En vivo · 2024",
+      "type_en": "Live · 2024",
+      "cover": "/assets/img/releases/uncion-en-el-aire-en-vivo.jpg",
+      "audio": "/assets/audio/uncion-en-el-aire-en-vivo.mp3",
+      "audio_url": "",
+      "spotify": "https://open.spotify.com/track/5HueTmhUbaXJQpM33wdQ6P",
+      "color": "sky",
+      "soon": false
+    },
+    {
+      "title": "Suena El Arpa",
+      "artist": "Grupo Grace",
+      "type_es": "En vivo · 2023",
+      "type_en": "Live · 2023",
+      "cover": "/assets/img/releases/suena-el-arpa-en-vivo.jpg",
+      "audio": "/assets/audio/suena-el-arpa-en-vivo.mp3",
+      "audio_url": "",
+      "spotify": "https://open.spotify.com/track/3AJdWcFGQ3Pb3BfqCtwli0",
+      "color": "white",
+      "soon": false
+    }
+  ]
+}

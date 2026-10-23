@@ -1,28 +1,50 @@
 OMG.register('artist', {
   render: function () {
-    var $ = OMG.$, $$ = OMG.$$;
-    var artists = OMG.data.artists || [];
+    var $ = OMG.$, $$ = OMG.$$, esc = OMG.esc, pick = OMG.pick;
+    var artists = OMG.list('artists.items').filter(function (a) { return a.name; });
     if (OMG.page !== 'artist' || !artists.length) return;
 
+    var slugOf = function (a) { return a.slug || OMG.slug(a.name); };
     var slug = new URLSearchParams(location.search).get('a');
-    var idx = Math.max(0, artists.findIndex(function (a) { return a.slug === slug; }));
+    var idx = Math.max(0, artists.findIndex(function (a) { return slugOf(a) === slug; }));
     var a = artists[idx];
     var next = artists[(idx + 1) % artists.length];
 
+    var set = function (sel, value, html) {
+      $$(sel).forEach(function (el) { if (html) el.innerHTML = value; else el.textContent = value; });
+    };
     document.title = a.name + ' — One Music Global';
-    $$('[data-artist-name]').forEach(function (el) { el.textContent = a.name; });
-    $$('[data-artist-tag]').forEach(function (el) { el.textContent = OMG.tr(a.tag); });
-    $$('[data-artist-release]').forEach(function (el) { el.textContent = OMG.tr(a.release); });
+    set('[data-artist-name]', a.name);
+    set('[data-artist-tag]', pick(a, 'tag') || '—');
+    set('[data-artist-release]', a.release || '—');
+    set('[data-artist-label]', a.label || 'One Music Global');
+    set('[data-artist-handle]', a.booking_handle || '—');
+    set('[data-artist-bio]', OMG.fmt(pick(a, 'bio')), true);
+    set('[data-artist-note]', OMG.fmt(pick(a, 'note')), true);
+    $$('[data-artist-note]').forEach(function (el) { el.hidden = !pick(a, 'note'); });
+
+    var links = { listen: a.listen_url, booking: a.booking_url };
+    $$('[data-artist-link]').forEach(function (el) {
+      var url = links[el.dataset.artistLink];
+      if (url) el.href = url; else el.hidden = true;
+    });
 
     var heroImg = $('.a-hero__img img');
-    if (heroImg) { heroImg.src = a.img; heroImg.alt = a.name; }
+    if (heroImg) { heroImg.src = OMG.media(a.cover || a.photo); heroImg.alt = a.name; }
 
-    var pool = OMG.data.gallery || [];
-    if (pool.length) $$('.a-gallery img').forEach(function (img, i) { img.src = pool[(idx + i) % pool.length]; });
+    var gallery = $('.a-gallery');
+    var photos = (Array.isArray(a.gallery) ? a.gallery : []).filter(Boolean);
+    if (gallery) {
+      gallery.innerHTML = photos.map(function (p) {
+        return '<figure><img src="' + esc(OMG.media(p)) + '" alt="' + esc(a.name) + '" loading="lazy"></figure>';
+      }).join('');
+      var section = gallery.closest('section');
+      if (section) section.hidden = !photos.length;
+    }
 
     var nextLink = $('.a-next');
     if (nextLink) {
-      nextLink.href = 'artista.html?a=' + encodeURIComponent(next.slug);
+      nextLink.href = 'artista.html?a=' + encodeURIComponent(slugOf(next));
       $('strong', nextLink).textContent = next.name;
     }
   },

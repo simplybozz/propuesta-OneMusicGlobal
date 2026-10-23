@@ -3,19 +3,21 @@ OMG.register('releases', {
     var box = OMG.$('[data-render="releases"]');
     if (!box) return;
     var esc = OMG.esc, t = OMG.t;
-    box.innerHTML = (OMG.data.releases || []).map(function (r) {
+    box.innerHTML = OMG.list('releases.items').filter(function (r) { return r.title; }).map(function (r) {
       var soon = !!r.soon;
+      var cover = OMG.media(r.cover);
+      var type = OMG.pick(r, 'type');
       return '' +
         '<button class="record reveal-up' + (soon ? ' record--soon' : '') + '" style="--c: var(--' + esc(r.color || 'blue') + ')"' +
-        ' data-title="' + esc(r.title) + '" data-artist="' + esc(r.artist) + '" data-img="' + esc(r.img) + '"' +
-        ' data-link="' + esc(r.link || '') + '" data-audio="' + esc(r.audio || '') + '"' +
+        ' data-title="' + esc(r.title) + '" data-artist="' + esc(r.artist) + '" data-img="' + esc(cover) + '"' +
+        ' data-link="' + esc(r.spotify || '') + '" data-audio="' + esc(OMG.media(r.audio) || r.audio_url || '') + '"' +
         ' data-cursor="' + (soon ? esc(t('cursor.soon', 'PRONTO')) : 'PLAY') + '" aria-label="' + esc(soon ? t('releases.soon', 'Próximamente') : t('releases.listen', 'Escuchar {title} de {artist}', { title: r.title, artist: r.artist })) + '">' +
         '<span class="record__stage">' +
         '<span class="record__vinyl"><span class="spin"></span></span>' +
-        '<span class="record__cover"><img src="' + esc(r.img) + '" alt="' + esc(t('releases.cover', 'Portada de {title}', { title: r.title })) + '" loading="lazy" decoding="async">' +
+        '<span class="record__cover"><img src="' + esc(cover) + '" alt="' + esc(t('releases.cover', 'Portada de {title}', { title: r.title })) + '" loading="lazy" decoding="async">' +
         (soon ? '<span class="record__title">' + esc(r.title) + '<small>' + esc(r.artist) + '</small></span>' : '') + '</span>' +
         '</span>' +
-        '<span class="record__meta"><b>' + esc(r.label || r.title) + '</b><span>' + esc(r.artist) + ' · ' + esc(OMG.tr(r.type)) + '</span></span>' +
+        '<span class="record__meta"><b>' + esc(r.title) + '</b><span>' + esc([r.artist, type].filter(Boolean).join(' · ')) + '</span></span>' +
         '</button>';
     }).join('');
   },

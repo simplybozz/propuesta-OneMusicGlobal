@@ -2,8 +2,8 @@ OMG.register('stats', {
   render: function () {
     var box = OMG.$('[data-render="stats"]');
     if (!box) return;
-    box.innerHTML = (OMG.data.stats || []).map(function (s) {
-      return '<div class="stat"><div class="stat__n"><span data-count="' + Number(s.value) + '">0</span>' + OMG.esc(s.suffix) + '</div><p>' + OMG.esc(OMG.tr(s.label)) + '</p></div>';
+    box.innerHTML = OMG.list('stats.items').map(function (s) {
+      return '<div class="stat"><div class="stat__n"><span data-count="' + (Number(s.value) || 0) + '">0</span>' + OMG.esc(s.suffix || '') + '</div><p>' + OMG.esc(OMG.pick(s, 'label')) + '</p></div>';
     }).join('');
   },
 

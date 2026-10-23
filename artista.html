@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Artista — One Music Global</title>
-  <meta name="description" content="Perfil de artista de One Music Global." data-i18n-attr="content:meta.artistDesc">
+  <meta name="description" content="Perfil de artista de One Music Global.">
   <meta name="theme-color" content="#050a26">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 
@@ -14,9 +14,8 @@
   <link rel="stylesheet" href="css/main.css">
 
   <script>
-    document.documentElement.classList.add('js');
-    try { if ((new URLSearchParams(location.search).get('lang') || localStorage.getItem('omg-lang')) === 'en') document.documentElement.classList.add('i18n-wait'); } catch (e) { }
-    setTimeout(function () { if (!window.__omgReady) document.documentElement.classList.remove('js'); }, 4500);
+    document.documentElement.classList.add('js', 'c-wait');
+    setTimeout(function () { if (!window.__omgReady) document.documentElement.classList.remove('js', 'c-wait'); }, 8000);
   </script>
 </head>
 <body data-page="artist">
@@ -44,33 +43,33 @@
       </div>
       <a class="pill" href="index.html#roster" data-transition>
         <svg class="a-roster-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
-        <span data-i18n="artist.roster">Todo el roster</span>
+        <span data-c="artistPage.all_roster">Todo el roster</span>
       </a>
     </div>
   </header>
 
   <main>
     <section class="a-hero" data-bg="ink">
-      <div class="a-hero__img"><img src="assets/img/p3.jpg" alt=""></div>
+      <div class="a-hero__img"><img alt=""></div>
       <div>
         <a class="a-back reveal-up" href="index.html#roster" data-transition>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
-          <span data-i18n="artist.back">Volver al roster</span>
+          <span data-c="artistPage.back">Volver al roster</span>
         </a>
         <h1 class="display">
           <span class="line"><span data-artist-name>Artista</span></span>
         </h1>
         <div class="a-hero__meta">
-          <p class="eyebrow reveal-up"><span data-artist-tag>Worship</span> · One Music Global</p>
+          <p class="eyebrow reveal-up"><span data-artist-tag>—</span> · One Music Global</p>
           <div class="hero__ctas reveal-up">
-            <a class="btn magnetic" href="https://open.spotify.com/playlist/2KwyAltnq7obNVKRtvARpS" target="_blank" rel="noopener">
-              <span data-i18n="artist.listen">Escuchar</span>
+            <a class="btn magnetic" href="https://open.spotify.com/playlist/2KwyAltnq7obNVKRtvARpS" data-artist-link="listen" target="_blank" rel="noopener">
+              <span data-c="artistPage.listen">Escuchar</span>
               <span class="btn__icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
               </span>
             </a>
-            <a class="btn-glow magnetic" href="https://www.instagram.com/onemusicglobal/" target="_blank" rel="noopener">Booking</a>
+            <a class="btn-glow magnetic" href="https://www.instagram.com/onemusicglobal/" data-artist-link="booking" target="_blank" rel="noopener" data-c="artistPage.booking">Booking</a>
           </div>
         </div>
       </div>
@@ -79,41 +78,36 @@
     <section class="section" data-bg="ink">
       <div class="a-bio">
         <ul class="a-facts reveal-up">
-          <li><span data-i18n="artist.genre">Género</span><b data-artist-tag>Worship</b></li>
-          <li><span data-i18n="artist.label">Sello</span><b>One Music Global</b></li>
-          <li><span data-i18n="artist.latest">Último lanzamiento</span><b data-artist-release>—</b></li>
-          <li><span>Booking</span><b>@onemusicglobal</b></li>
+          <li><span data-c="artistPage.genre">Género</span><b data-artist-tag>—</b></li>
+          <li><span data-c="artistPage.label">Sello</span><b data-artist-label>One Music Global</b></li>
+          <li><span data-c="artistPage.latest">Último lanzamiento</span><b data-artist-release>—</b></li>
+          <li><span data-c="artistPage.booking">Booking</span><b data-artist-handle>@onemusicglobal</b></li>
         </ul>
         <div>
-          <p data-words data-i18n="artist.bio">Este perfil es una plantilla de la propuesta. Aquí va la biografía oficial: la historia del artista, su mensaje y los momentos que marcaron su carrera.</p>
-          <p class="hand" data-i18n="artist.bioNote">✦ texto de muestra, se reemplaza con la bio real</p>
+          <p data-words data-artist-bio></p>
+          <p class="hand" data-artist-note></p>
         </div>
       </div>
     </section>
 
     <section class="section a-gallery-section" data-bg="ink">
-      <div class="a-gallery">
-        <figure><img src="assets/img/p8.jpg" alt="" loading="lazy"></figure>
-        <figure><img src="assets/img/p6.jpg" alt="" loading="lazy"></figure>
-        <figure><img src="assets/img/p18.jpg" alt="" loading="lazy"></figure>
-        <figure><img src="assets/img/p1.jpg" alt="" loading="lazy"></figure>
-      </div>
+      <div class="a-gallery"></div>
     </section>
 
     <a class="a-next" href="artista.html" data-transition data-cursor="SIGUIENTE" data-i18n-attr="data-cursor:cursor.next">
-      <small data-i18n="artist.next">Siguiente artista</small>
+      <small data-c="artistPage.next">Siguiente artista</small>
       <strong>—</strong>
     </a>
   </main>
 
   <footer class="footer">
     <div class="footer__base">
-      <span data-i18n="footer.rights">© 2026 One Music Global. Todos los derechos reservados.</span>
+      <span data-c="settings.footer_rights">© 2026 One Music Global. Todos los derechos reservados.</span>
       <a href="index.html" class="logo footer__logo" aria-label="One Music Global — inicio" data-transition data-i18n-attr="aria-label:a11y.home">
         ONE<svg class="logo-m" viewBox="0 0 26 20" aria-hidden="true"><path class="m1" d="M0 0 13 11 0 20Z"/><path class="m2" d="M26 0 13 11 26 20Z"/></svg>USIC
         <small>GLOBAL</small>
       </a>
-      <span data-i18n="footer.tagline">Música con propósito ✦ Hecho con fe</span>
+      <span data-c="settings.footer_tagline">Música con propósito ✦ Hecho con fe</span>
     </div>
   </footer>
 
@@ -125,13 +119,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 
-  <script src="js/data/artists.js"></script>
-  <script src="js/data/gallery.js"></script>
-
-  <script src="js/data/i18n.js"></script>
-
   <script src="js/core/app.js"></script>
   <script src="js/core/i18n.js"></script>
+  <script src="js/core/content.js"></script>
 
   <script src="js/sections/artist.js"></script>
 
