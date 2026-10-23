@@ -11,8 +11,8 @@ OMG.register('artist', {
 
     document.title = a.name + ' — One Music Global';
     $$('[data-artist-name]').forEach(function (el) { el.textContent = a.name; });
-    $$('[data-artist-tag]').forEach(function (el) { el.textContent = a.tag; });
-    $$('[data-artist-release]').forEach(function (el) { el.textContent = a.release; });
+    $$('[data-artist-tag]').forEach(function (el) { el.textContent = OMG.tr(a.tag); });
+    $$('[data-artist-release]').forEach(function (el) { el.textContent = OMG.tr(a.release); });
 
     var heroImg = $('.a-hero__img img');
     if (heroImg) { heroImg.src = a.img; heroImg.alt = a.name; }

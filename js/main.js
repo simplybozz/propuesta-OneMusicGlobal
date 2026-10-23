@@ -90,7 +90,7 @@
   function openMenu() {
     body.classList.add('menu-open');
     toggle.setAttribute('aria-expanded', 'true');
-    toggle.setAttribute('aria-label', 'Cerrar menú');
+    toggle.setAttribute('aria-label', OMG.t('menu.close', 'Cerrar menú'));
     menu.setAttribute('aria-hidden', 'false');
     nav.classList.remove('is-hidden');
     if (lenis) lenis.stop();
@@ -101,7 +101,7 @@
     if (!menuTl || !body.classList.contains('menu-open')) return;
     body.classList.remove('menu-open');
     toggle.setAttribute('aria-expanded', 'false');
-    toggle.setAttribute('aria-label', 'Abrir menú');
+    toggle.setAttribute('aria-label', OMG.t('menu.open', 'Abrir menú'));
     menu.setAttribute('aria-hidden', 'true');
     if (lenis) lenis.start();
     menuTl.timeScale(1.6).reverse();
@@ -186,7 +186,9 @@
   var loader = $('.loader');
   var cameFromTransition = sessionStorage.getItem('omg-transition') === '1';
   var seenLoader = sessionStorage.getItem('omg-loaded') === '1';
+  var restoreY = Number(sessionStorage.getItem('omg-scroll')) || 0;
   sessionStorage.removeItem('omg-transition');
+  sessionStorage.removeItem('omg-scroll');
 
   function playIntro() {
     if (intro) intro.play();
@@ -195,6 +197,10 @@
 
   if (cameFromTransition) {
     if (loader) loader.remove();
+    if (restoreY) {
+      ScrollTrigger.refresh();
+      if (lenis) lenis.scrollTo(restoreY, { immediate: true, force: true }); else window.scrollTo(0, restoreY);
+    }
     gsap.set(curtainPanels, { yPercent: 0 });
     gsap.to(curtainPanels.slice().reverse(), {
       yPercent: -100, duration: 1.1, stagger: 0.09, ease: 'expo.inOut', delay: 0.15,
@@ -229,14 +235,21 @@
     playIntro();
   }
 
+  function leave(go, keepScroll) {
+    sessionStorage.setItem('omg-transition', '1');
+    if (keepScroll) sessionStorage.setItem('omg-scroll', String(Math.round(window.scrollY)));
+    closeMenu();
+    if (lenis) lenis.stop();
+    gsap.to(curtainPanels, { yPercent: 0, duration: 0.95, stagger: 0.09, ease: 'expo.inOut', onComplete: go });
+  }
+  OMG.leave = leave;
+
   document.addEventListener('click', function (e) {
     var a = e.target.closest('a[data-transition]');
     if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
     e.preventDefault();
     var href = a.href;
-    sessionStorage.setItem('omg-transition', '1');
-    if (lenis) lenis.stop();
-    gsap.to(curtainPanels, { yPercent: 0, duration: 0.95, stagger: 0.09, ease: 'expo.inOut', onComplete: function () { window.location.href = href; } });
+    leave(function () { window.location.href = href; });
   });
 
   window.addEventListener('pageshow', function (e) {

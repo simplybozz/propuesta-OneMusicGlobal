@@ -5,20 +5,20 @@ OMG.register('roster', {
     var esc = OMG.esc, arrow = OMG.icons.arrow;
     var html = (OMG.data.artists || []).map(function (a, i) {
       return '' +
-        '<a class="artist" href="artista.html?a=' + encodeURIComponent(a.slug) + '" data-transition data-cursor="VER">' +
+        '<a class="artist" href="artista.html?a=' + encodeURIComponent(a.slug) + '" data-transition data-cursor="' + esc(OMG.t('cursor.view', 'VER')) + '">' +
         '<div class="artist__img"><img src="' + esc(a.img) + '" alt="' + esc(a.name) + '" loading="lazy" decoding="async"></div>' +
         '<span class="artist__num">' + String(i + 1).padStart(2, '0') + '</span>' +
-        '<span class="artist__tag">' + esc(a.tag) + '</span>' +
+        '<span class="artist__tag">' + esc(OMG.tr(a.tag)) + '</span>' +
         '<div class="artist__body"><h3 class="artist__name">' + esc(a.name) + '</h3>' +
-        '<span class="artist__more">Ver artista ' + arrow + '</span></div>' +
+        '<span class="artist__more">' + esc(OMG.t('roster.more', 'Ver artista')) + ' ' + arrow + '</span></div>' +
         '<span class="artist__glare"></span>' +
         '</a>';
     }).join('');
     html += '' +
       '<div class="artist artist--cta">' +
-      '<span class="eyebrow">¿Eres el próximo?</span>' +
-      '<h3>Tu nombre<br>podría estar<br>aquí</h3>' +
-      '<a class="btn" href="#contacto">Escríbenos <span class="btn__icon">' + arrow + arrow + '</span></a>' +
+      '<span class="eyebrow">' + esc(OMG.t('roster.ctaEyebrow', '¿Eres el próximo?')) + '</span>' +
+      '<h3>' + OMG.t('roster.ctaTitle', 'Tu nombre<br>podría estar<br>aquí') + '</h3>' +
+      '<a class="btn" href="#contacto">' + esc(OMG.t('roster.ctaBtn', 'Escríbenos')) + ' <span class="btn__icon">' + arrow + arrow + '</span></a>' +
       '</div>';
     track.innerHTML = html;
   },

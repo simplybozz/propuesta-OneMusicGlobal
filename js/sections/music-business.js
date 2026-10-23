@@ -2,7 +2,7 @@ OMG.register('music-business', {
   render: function () {
     var track = OMG.$('.mb__ticker-track');
     if (!track) return;
-    var text = (OMG.data.musicBusinessTicker || []).join(' ✦ ') + ' ✦ ';
+    var text = (OMG.data.musicBusinessTicker || []).map(OMG.tr).join(' ✦ ') + ' ✦ ';
     var item = '<span>' + OMG.esc(text) + '</span>';
     var build = function () {
       track.innerHTML = item;

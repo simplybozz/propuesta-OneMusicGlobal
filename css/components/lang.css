@@ -1,0 +1,66 @@
+.i18n-wait [data-i18n] {
+  visibility: hidden;
+}
+
+.lang {
+  position: relative;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 3px;
+  border-radius: 999px;
+  border: 1.5px solid currentColor;
+  isolation: isolate;
+  transition: border-color var(--t) var(--ease-out);
+}
+
+.lang button {
+  position: relative;
+  z-index: 1;
+  min-width: 2.6em;
+  padding: .55em .7em;
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  line-height: 1;
+  color: inherit;
+  transition: color var(--t) var(--ease-out), opacity var(--t) var(--ease-out);
+}
+
+.lang button[aria-pressed="false"] {
+  opacity: .65;
+}
+
+.lang button[aria-pressed="false"]:hover {
+  opacity: 1;
+}
+
+.lang button[aria-pressed="true"] {
+  color: var(--bg);
+}
+
+.lang__thumb {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 3px;
+  width: calc(50% - 3px);
+  border-radius: 999px;
+  background: var(--fg);
+  transition: transform var(--t) var(--ease-out), background-color var(--t) var(--ease-out);
+}
+
+.lang[data-active="en"] .lang__thumb {
+  transform: translateX(100%);
+}
+
+.menu-open .nav .lang {
+  border-color: var(--ink);
+}
+
+.menu-open .nav .lang__thumb {
+  background: var(--ink);
+}
+
+.menu-open .nav .lang button[aria-pressed="true"] {
+  color: var(--yellow);
+}

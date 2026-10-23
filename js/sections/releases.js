@@ -2,20 +2,20 @@ OMG.register('releases', {
   render: function () {
     var box = OMG.$('[data-render="releases"]');
     if (!box) return;
-    var esc = OMG.esc;
+    var esc = OMG.esc, t = OMG.t;
     box.innerHTML = (OMG.data.releases || []).map(function (r) {
       var soon = !!r.soon;
       return '' +
         '<button class="record reveal-up' + (soon ? ' record--soon' : '') + '" style="--c: var(--' + esc(r.color || 'blue') + ')"' +
         ' data-title="' + esc(r.title) + '" data-artist="' + esc(r.artist) + '" data-img="' + esc(r.img) + '"' +
         ' data-link="' + esc(r.link || '') + '" data-audio="' + esc(r.audio || '') + '"' +
-        ' data-cursor="' + (soon ? 'PRONTO' : 'PLAY') + '" aria-label="' + (soon ? 'Próximamente' : 'Escuchar ' + esc(r.title) + ' de ' + esc(r.artist)) + '">' +
+        ' data-cursor="' + (soon ? esc(t('cursor.soon', 'PRONTO')) : 'PLAY') + '" aria-label="' + esc(soon ? t('releases.soon', 'Próximamente') : t('releases.listen', 'Escuchar {title} de {artist}', { title: r.title, artist: r.artist })) + '">' +
         '<span class="record__stage">' +
         '<span class="record__vinyl"><span class="spin"></span></span>' +
-        '<span class="record__cover"><img src="' + esc(r.img) + '" alt="Portada de ' + esc(r.title) + '" loading="lazy" decoding="async">' +
+        '<span class="record__cover"><img src="' + esc(r.img) + '" alt="' + esc(t('releases.cover', 'Portada de {title}', { title: r.title })) + '" loading="lazy" decoding="async">' +
         (soon ? '<span class="record__title">' + esc(r.title) + '<small>' + esc(r.artist) + '</small></span>' : '') + '</span>' +
         '</span>' +
-        '<span class="record__meta"><b>' + esc(r.label || r.title) + '</b><span>' + esc(r.artist) + ' · ' + esc(r.type) + '</span></span>' +
+        '<span class="record__meta"><b>' + esc(r.label || r.title) + '</b><span>' + esc(r.artist) + ' · ' + esc(OMG.tr(r.type)) + '</span></span>' +
         '</button>';
     }).join('');
   },
@@ -36,7 +36,7 @@ OMG.register('releases', {
       var paused = audio.paused;
       player.classList.toggle('is-paused', paused);
       playBtn.innerHTML = paused ? icons.play : icons.pause;
-      playBtn.setAttribute('aria-label', paused ? 'Reproducir' : 'Pausar');
+      playBtn.setAttribute('aria-label', paused ? OMG.t('player.play', 'Reproducir') : OMG.t('player.pause', 'Pausar'));
       records.forEach(function (r) { r.classList.toggle('is-playing', !paused && r === current); });
     }
 

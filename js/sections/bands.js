@@ -1,7 +1,7 @@
 OMG.register('bands', {
   render: function () {
     var items = OMG.data.bands || [];
-    var chunk = items.map(function (t) { return '<span>' + OMG.esc(t) + OMG.icons.star + '</span>'; }).join('');
+    var chunk = items.map(function (t) { return '<span>' + OMG.esc(OMG.tr(t)) + OMG.icons.star + '</span>'; }).join('');
     OMG.$$('.band__track').forEach(function (track) {
       track.innerHTML = chunk + chunk + chunk + chunk;
     });

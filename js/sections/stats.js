@@ -3,7 +3,7 @@ OMG.register('stats', {
     var box = OMG.$('[data-render="stats"]');
     if (!box) return;
     box.innerHTML = (OMG.data.stats || []).map(function (s) {
-      return '<div class="stat"><div class="stat__n"><span data-count="' + Number(s.value) + '">0</span>' + OMG.esc(s.suffix) + '</div><p>' + OMG.esc(s.label) + '</p></div>';
+      return '<div class="stat"><div class="stat__n"><span data-count="' + Number(s.value) + '">0</span>' + OMG.esc(s.suffix) + '</div><p>' + OMG.esc(OMG.tr(s.label)) + '</p></div>';
     }).join('');
   },
 

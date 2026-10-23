@@ -6,15 +6,15 @@ OMG.register('services', {
     var list = OMG.data.services || [];
     var total = String(list.length).padStart(2, '0');
     box.innerHTML = list.map(function (s, i) {
-      var title = esc(s.title) + (s.highlight ? ' <span class="hl">' + esc(s.highlight) + '</span>' : '');
+      var title = esc(OMG.tr(s.title)) + (s.highlight ? ' <span class="hl">' + esc(OMG.tr(s.highlight)) + '</span>' : '');
       return '' +
         '<article class="svc svc--' + esc(s.color || 'blue') + '" style="--i:' + i + '">' +
         '<div class="svc__top">' +
         '<span class="svc__num">' + String(i + 1).padStart(2, '0') + ' / ' + total + '</span>' +
-        '<div><h3 class="display">' + title + '</h3><p>' + s.text + '</p></div>' +
-        '<div class="svc__chips">' + (s.chips || []).map(function (c) { return '<span>' + esc(c) + '</span>'; }).join('') + '</div>' +
+        '<div><h3 class="display">' + title + '</h3><p>' + OMG.tr(s.text) + '</p></div>' +
+        '<div class="svc__chips">' + (s.chips || []).map(function (c) { return '<span>' + esc(OMG.tr(c)) + '</span>'; }).join('') + '</div>' +
         '</div>' +
-        '<div class="svc__media"><img src="' + esc(s.img) + '" alt="' + esc(s.alt || '') + '" loading="lazy" decoding="async"></div>' +
+        '<div class="svc__media"><img src="' + esc(s.img) + '" alt="' + esc(OMG.tr(s.alt || '')) + '" loading="lazy" decoding="async"></div>' +
         '</article>';
     }).join('');
   },

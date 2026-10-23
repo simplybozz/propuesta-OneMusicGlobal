@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Artista — One Music Global</title>
-  <meta name="description" content="Perfil de artista de One Music Global.">
+  <meta name="description" content="Perfil de artista de One Music Global." data-i18n-attr="content:meta.artistDesc">
   <meta name="theme-color" content="#050a26">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 
@@ -15,6 +15,7 @@
 
   <script>
     document.documentElement.classList.add('js');
+    try { if ((new URLSearchParams(location.search).get('lang') || localStorage.getItem('omg-lang')) === 'en') document.documentElement.classList.add('i18n-wait'); } catch (e) { }
     setTimeout(function () { if (!window.__omgReady) document.documentElement.classList.remove('js'); }, 4500);
   </script>
 </head>
@@ -28,17 +29,22 @@
   </div>
 
   <div class="grain" aria-hidden="true"></div>
-  <div class="cursor" aria-hidden="true"><span>VER</span></div>
+  <div class="cursor" aria-hidden="true"><span data-i18n="cursor.view">VER</span></div>
 
   <header class="nav">
-    <a href="index.html" class="logo" aria-label="One Music Global — inicio" data-transition>
+    <a href="index.html" class="logo" aria-label="One Music Global — inicio" data-transition data-i18n-attr="aria-label:a11y.home">
       ONE<svg class="logo-m" viewBox="0 0 26 20" aria-hidden="true"><path class="m1" d="M0 0 13 11 0 20Z"/><path class="m2" d="M26 0 13 11 26 20Z"/></svg>USIC
       <small>GLOBAL</small>
     </a>
     <div class="nav__right">
+      <div class="lang" role="group" aria-label="Idioma" data-i18n-attr="aria-label:a11y.lang">
+        <button type="button" data-lang="es">ES</button>
+        <button type="button" data-lang="en">EN</button>
+        <i class="lang__thumb" aria-hidden="true"></i>
+      </div>
       <a class="pill" href="index.html#roster" data-transition>
         <svg class="a-roster-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
-        Todo el roster
+        <span data-i18n="artist.roster">Todo el roster</span>
       </a>
     </div>
   </header>
@@ -49,7 +55,7 @@
       <div>
         <a class="a-back reveal-up" href="index.html#roster" data-transition>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
-          Volver al roster
+          <span data-i18n="artist.back">Volver al roster</span>
         </a>
         <h1 class="display">
           <span class="line"><span data-artist-name>Artista</span></span>
@@ -58,7 +64,7 @@
           <p class="eyebrow reveal-up"><span data-artist-tag>Worship</span> · One Music Global</p>
           <div class="hero__ctas reveal-up">
             <a class="btn magnetic" href="https://open.spotify.com/playlist/2KwyAltnq7obNVKRtvARpS" target="_blank" rel="noopener">
-              Escuchar
+              <span data-i18n="artist.listen">Escuchar</span>
               <span class="btn__icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
@@ -73,14 +79,14 @@
     <section class="section" data-bg="ink">
       <div class="a-bio">
         <ul class="a-facts reveal-up">
-          <li><span>Género</span><b data-artist-tag>Worship</b></li>
-          <li><span>Sello</span><b>One Music Global</b></li>
-          <li><span>Último lanzamiento</span><b data-artist-release>—</b></li>
+          <li><span data-i18n="artist.genre">Género</span><b data-artist-tag>Worship</b></li>
+          <li><span data-i18n="artist.label">Sello</span><b>One Music Global</b></li>
+          <li><span data-i18n="artist.latest">Último lanzamiento</span><b data-artist-release>—</b></li>
           <li><span>Booking</span><b>@onemusicglobal</b></li>
         </ul>
         <div>
-          <p data-words>Este perfil es una plantilla de la propuesta. Aquí va la biografía oficial: la historia del artista, su mensaje y los momentos que marcaron su carrera.</p>
-          <p class="hand">✦ texto de muestra, se reemplaza con la bio real</p>
+          <p data-words data-i18n="artist.bio">Este perfil es una plantilla de la propuesta. Aquí va la biografía oficial: la historia del artista, su mensaje y los momentos que marcaron su carrera.</p>
+          <p class="hand" data-i18n="artist.bioNote">✦ texto de muestra, se reemplaza con la bio real</p>
         </div>
       </div>
     </section>
@@ -94,24 +100,24 @@
       </div>
     </section>
 
-    <a class="a-next" href="artista.html" data-transition data-cursor="SIGUIENTE">
-      <small>Siguiente artista</small>
+    <a class="a-next" href="artista.html" data-transition data-cursor="SIGUIENTE" data-i18n-attr="data-cursor:cursor.next">
+      <small data-i18n="artist.next">Siguiente artista</small>
       <strong>—</strong>
     </a>
   </main>
 
   <footer class="footer">
     <div class="footer__base">
-      <span>© 2026 One Music Global. Todos los derechos reservados.</span>
-      <a href="index.html" class="logo footer__logo" aria-label="One Music Global — inicio" data-transition>
+      <span data-i18n="footer.rights">© 2026 One Music Global. Todos los derechos reservados.</span>
+      <a href="index.html" class="logo footer__logo" aria-label="One Music Global — inicio" data-transition data-i18n-attr="aria-label:a11y.home">
         ONE<svg class="logo-m" viewBox="0 0 26 20" aria-hidden="true"><path class="m1" d="M0 0 13 11 0 20Z"/><path class="m2" d="M26 0 13 11 26 20Z"/></svg>USIC
         <small>GLOBAL</small>
       </a>
-      <span>Música con propósito ✦ Hecho con fe</span>
+      <span data-i18n="footer.tagline">Música con propósito ✦ Hecho con fe</span>
     </div>
   </footer>
 
-  <button class="to-top" aria-label="Volver al inicio" data-cursor="ARRIBA">
+  <button class="to-top" aria-label="Volver al inicio" data-cursor="ARRIBA" data-i18n-attr="aria-label:toTop;data-cursor:cursor.up">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
   </button>
 
@@ -122,7 +128,10 @@
   <script src="js/data/artists.js"></script>
   <script src="js/data/gallery.js"></script>
 
+  <script src="js/data/i18n.js"></script>
+
   <script src="js/core/app.js"></script>
+  <script src="js/core/i18n.js"></script>
 
   <script src="js/sections/artist.js"></script>
 
