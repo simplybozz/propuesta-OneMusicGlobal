@@ -118,6 +118,14 @@
   margin-top: .1em;
 }
 
+html[lang="en"] .mb__title {
+  font-size: calc(clamp(6.4rem, min(12vw, 15vh), 12rem) * 1.25);
+}
+
+html[lang="en"] .mb__title .mb__line-box {
+  font-size: .185em;
+}
+
 .mb__box {
   display: inline-block;
   background: var(--mb-yellow);
